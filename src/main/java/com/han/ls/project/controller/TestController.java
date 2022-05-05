@@ -5,6 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * TODO jackson序列化返回空字符串 空集合 空对象 [] {}
+ */
 @RestController
 public class TestController {
 
