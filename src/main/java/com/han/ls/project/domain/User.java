@@ -1,10 +1,12 @@
 package com.han.ls.project.domain;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import java.util.Date;
 
 @Data
+@Accessors(chain = true)
 public class User {
 
     private int id;
@@ -41,6 +43,6 @@ public class User {
 
     private Date updateTime;
 
-    private boolean disabledFlag;
+    private String disabledFlag;
 
 }
