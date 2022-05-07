@@ -38,5 +38,12 @@ public class LsTests {
         addressService.insertAll(list);
     }
 
+    @Test
+    public void insert() {
+        List<Address> list = addressService.all();
+
+
+    }
+
 
 }

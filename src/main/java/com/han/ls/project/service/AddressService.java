@@ -18,4 +18,8 @@ public class AddressService {
     public void insertAll(List<Address> list) {
         addressMapper.insertAll(list);
     }
+
+    public List<Address> all() {
+        return addressMapper.all();
+    }
 }

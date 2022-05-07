@@ -7,4 +7,6 @@ import java.util.List;
 public interface AddressMapper {
 
     void insertAll(List<Address> list);
+
+    List<Address> all();
 }
