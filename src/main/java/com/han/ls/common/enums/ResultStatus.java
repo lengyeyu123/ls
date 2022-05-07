@@ -1,4 +1,4 @@
-package com.han.ls.common.constant;
+package com.han.ls.common.enums;
 
 import lombok.Getter;
 

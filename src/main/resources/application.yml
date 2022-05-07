@@ -81,7 +81,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/local_server?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
     username: root
-    password: mysql
+    password: root
 
 
 # MyBatis
@@ -103,3 +103,17 @@ pagehelper:
 swagger:
   # 是否开启swagger
   enabled: true
+
+
+# token配置
+token:
+  atConfig:
+    header: access-token
+    secret: 1#*（&&（8899jjj(*$9LJ83293@#(*#&@
+    # 令牌有效期(默认48个小时 )（单位分钟）
+    expireTime: 2880
+  rtConfig:
+    header: refresh-token
+    secret: urnvjj&*$^@@((#(())
+    # 有效期 默认70天 （单位分钟）
+    expireTime: 100800

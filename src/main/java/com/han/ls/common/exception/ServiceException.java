@@ -1,6 +1,6 @@
 package com.han.ls.common.exception;
 
-import com.han.ls.common.constant.ResultStatus;
+import com.han.ls.common.enums.ResultStatus;
 
 /**
  * 业务异常

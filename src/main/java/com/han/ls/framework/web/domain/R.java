@@ -1,6 +1,6 @@
 package com.han.ls.framework.web.domain;
 
-import com.han.ls.common.constant.ResultStatus;
+import com.han.ls.common.enums.ResultStatus;
 import lombok.Data;
 
 import java.io.Serializable;

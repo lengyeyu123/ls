@@ -5,4 +5,13 @@
 <mapper namespace="com.han.ls.project.mapper.AddressMapper">
 
 
-</mapper> 
+    <insert id="insertAll" parameterType="com.han.ls.project.domain.Address">
+        insert into ls_address (code, name)
+        values
+        <foreach collection="list" index="index" item="item" separator=",">
+            ( #{item.code},
+            #{item.name})
+        </foreach>
+
+    </insert>
+</mapper>
