@@ -4,12 +4,22 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.han.ls.project.mapper.UserMapper">
 
-    <select id="list" resultType="User">
+    <select id="list" resultType="com.han.ls.project.domain.User">
         select *
         from ls_user
     </select>
+    <select id="selectById" resultType="com.han.ls.project.domain.User">
+        select *
+        from ls_user
+        where id = #{id}
+    </select>
+    <select id="selectByOpenId" resultType="com.han.ls.project.domain.User">
+        select *
+        from ls_user
+        where open_id = #{openId}
+    </select>
 
-    <insert id="add" parameterType="User">
+    <insert id="add" parameterType="com.han.ls.project.domain.User">
         insert into ls_user (user_name, create_time)
         values (#{userName}, #{createTime})
     </insert>

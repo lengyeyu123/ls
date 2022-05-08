@@ -9,4 +9,8 @@ public interface UserMapper {
     List<User> list();
 
     void add(User user);
+
+    User selectById(int id);
+
+    User selectByOpenId(String openId);
 }

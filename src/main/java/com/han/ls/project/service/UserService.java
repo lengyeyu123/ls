@@ -22,4 +22,10 @@ public class UserService {
         userMapper.add(new User().setUserName(userName)
                 .setCreateTime(DateUtils.getNowDate()));
     }
+
+    public void insertUsers(List<User> list) {
+        for (User user : list) {
+            userMapper.add(user);
+        }
+    }
 }

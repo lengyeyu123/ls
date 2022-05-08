@@ -39,6 +39,7 @@ public class R<T> implements Serializable {
         R<T> r = new R<>();
         r.setCode(ResultStatus.OK.getCode());
         r.setMsg(ResultStatus.OK.getMsg());
+        r.setData(data);
         return r;
     }
 

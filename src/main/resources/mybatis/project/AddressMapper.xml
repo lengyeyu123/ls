@@ -14,8 +14,70 @@
         </foreach>
 
     </insert>
+
+    <insert id="insertAllProvince" parameterType="com.han.ls.project.domain.Address">
+        insert into ls_province (code, name)
+        values
+        <foreach collection="list" index="index" item="item" separator=",">
+            (
+            #{item.code},
+            #{item.name}
+            )
+        </foreach>
+    </insert>
+    <insert id="insertAllCity" parameterType="com.han.ls.project.domain.City">
+        insert into ls_city (code, name, province_id, province_code, province_name)
+        values
+        <foreach collection="list" index="index" item="item" separator=",">
+            (
+            #{item.code},
+            #{item.name},
+            #{item.provinceId},
+            #{item.provinceCode},
+            #{item.provinceName}
+            )
+        </foreach>
+    </insert>
+    <insert id="insertAllCounty" parameterType="com.han.ls.project.domain.County">
+        insert into ls_county (code, name, province_id, province_code, province_name, city_id, city_code, city_name)
+        values
+        <foreach collection="list" index="index" item="item" separator=",">
+            (
+            #{item.code},
+            #{item.name},
+            #{item.provinceId},
+            #{item.provinceCode},
+            #{item.provinceName},
+            #{item.cityId},
+            #{item.cityCode},
+            #{item.cityName}
+            )
+        </foreach>
+    </insert>
+
     <select id="all" resultType="com.han.ls.project.domain.Address">
         select *
         from ls_address
+    </select>
+    <select id="allProvince" resultType="com.han.ls.project.domain.Province">
+        select *
+        from ls_province
+        order by code
+    </select>
+    <select id="allCity" resultType="com.han.ls.project.domain.City">
+        select *
+        from ls_city
+    </select>
+    <select id="selectCityByProvinceId" resultType="com.han.ls.project.domain.City">
+        select *
+        from ls_city
+        where province_id = #{id}
+        order by code
+    </select>
+    <select id="selectCountByCityId" resultType="com.han.ls.project.domain.County">
+        select *
+        from ls_county
+        where city_id = #{id}
+        order by code
     </select>
 </mapper>

@@ -109,11 +109,11 @@ swagger:
 token:
   atConfig:
     header: access-token
-    secret: 1#*（&&（8899jjj(*$9LJ83293@#(*#&@
+    secret: 1#*（&&（88assa%$f%$#^^fdsg*#&@
     # 令牌有效期(默认48个小时 )（单位分钟）
     expireTime: 2880
   rtConfig:
     header: refresh-token
-    secret: urnvjj&*$^@@((#(())
+    secret: urn&*$^@@((#)
     # 有效期 默认70天 （单位分钟）
     expireTime: 100800
