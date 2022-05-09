@@ -5,6 +5,7 @@ import com.han.ls.project.domain.City;
 import com.han.ls.project.domain.County;
 import com.han.ls.project.domain.Province;
 import com.han.ls.project.mapper.AddressMapper;
+import com.han.ls.project.mapper.UserMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,9 @@ public class AddressService {
 
     @Autowired
     private AddressMapper addressMapper;
+
+    @Autowired
+    private UserMapper userMapper;
 
     public void insertAll(List<Address> list) {
         addressMapper.insertAll(list);
@@ -53,4 +57,5 @@ public class AddressService {
     public List<County> selectCountByCityId(int id) {
         return addressMapper.selectCountByCityId(id);
     }
+
 }

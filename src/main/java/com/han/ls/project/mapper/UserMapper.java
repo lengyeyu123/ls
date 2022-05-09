@@ -15,4 +15,6 @@ public interface UserMapper {
     User selectByOpenId(String openId);
 
     void register(User user);
+
+    void updateUserInfo(User loginUser);
 }

@@ -1,7 +1,9 @@
 package com.han.ls.framework.web.domain;
 
 import com.han.ls.common.enums.ResultStatus;
+import com.han.ls.common.exception.ServiceException;
 import lombok.Data;
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;
 
@@ -62,6 +64,18 @@ public class R<T> implements Serializable {
         r.setCode(ResultStatus.OK.getCode());
         r.setMsg(msg);
         r.setData(data);
+        return r;
+    }
+
+    public static <T> R<T> error(ServiceException e) {
+        R<T> r = new R<>();
+        if (StringUtils.isNotBlank(e.getMsg())) {
+            r.setCode(ResultStatus.ERROR.getCode());
+            r.setMsg(e.getMsg());
+        } else {
+            r.setCode(ResultStatus.ERROR.getCode());
+            r.setMsg(ResultStatus.ERROR.getMsg());
+        }
         return r;
     }
 

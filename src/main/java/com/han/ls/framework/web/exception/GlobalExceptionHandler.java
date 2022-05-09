@@ -50,7 +50,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ServiceException.class)
     public Object handleServiceException(ServiceException e, HttpServletRequest request) {
         log.error(e.getMessage(), e);
-        return R.error(e.getResultStatus());
+        return R.error(e);
     }
 
 }

@@ -36,5 +36,4 @@ public class AddressController {
         return R.success(addressService.selectCountByCityId(id));
     }
 
-
 }
