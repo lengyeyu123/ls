@@ -23,5 +23,9 @@
         insert into ls_user (user_name, create_time)
         values (#{userName}, #{createTime})
     </insert>
+    <insert id="register" parameterType="com.han.ls.project.domain.User" keyProperty="id" useGeneratedKeys="true">
+        insert into ls_user (user_name, open_id, union_id, avatar_url, create_time)
+        values (#{userName}, #{openId}, #{unionId}, #{avatarUrl}, #{createTime})
+    </insert>
 
 </mapper> 

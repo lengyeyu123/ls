@@ -13,4 +13,6 @@ public interface UserMapper {
     User selectById(int id);
 
     User selectByOpenId(String openId);
+
+    void register(User user);
 }

@@ -108,12 +108,22 @@ swagger:
 # token配置
 token:
   atConfig:
-    header: access-token
+    header: accessToken
     secret: 1#*（&&（88assa%$f%$#^^fdsg*#&@
-    # 令牌有效期(默认48个小时 )（单位分钟）
-    expireTime: 2880
+    # 令牌有效期(默认7天 )（单位分钟）
+    expireTime: 10080
   rtConfig:
-    header: refresh-token
+    header: refreshToken
     secret: urn&*$^@@((#)
     # 有效期 默认70天 （单位分钟）
     expireTime: 100800
+
+# 小程序配置
+wx:
+  miniapp:
+    configs:
+      - appid: aaaa  #微信小程序的appid
+        secret: bbbb #微信小程序的Secret  原secret
+        token: #微信小程序消息服务器配置的token
+        aesKey: #微信小程序消息服务器配置的EncodingAESKey
+        msgDataFormat: JSON
