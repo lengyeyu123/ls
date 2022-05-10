@@ -19,6 +19,9 @@ public class JacksonConfig {
         // 为objectMapper注册一个带有SerializerModifier的Factory
         objectMapper.setSerializerFactory(objectMapper.getSerializerFactory()
                 .withSerializerModifier(new LsBeanSerializerModifier()));
+
+        // objectMapper.setTimeZone(TimeZone.getTimeZone("GMT+8"));
+        // objectMapper.setDateFormat(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"))
         return objectMapper;
     }
 
