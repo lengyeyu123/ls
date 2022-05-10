@@ -4,5 +4,45 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.han.ls.project.mapper.TaskMapper">
 
+    <insert id="add" parameterType="com.han.ls.project.domain.Task">
+        insert into ls_task (description, desc_imgs, issuer_id, publish_time, deadline, create_time)
+        values (#{description}, #{descImgs}, #{issuerId}, #{publishTime}, #{deadline}, #{createTime})
+    </insert>
+    <update id="finish" parameterType="com.han.ls.project.domain.Task">
+        update ls_task
+        set finish_time    = #{finishTime},
+            finish_user_id = #{finishUserId},
+            finish_imgs    = #{finishImgs},
+            case_id        = #{caseId},
+            update_time    = #{updateTime}
+        where id = #{id}
+    </update>
 
-</mapper> 
+    <select id="list" parameterType="com.han.ls.project.vo.req.TaskListReqVo"
+            resultType="com.han.ls.project.domain.Task">
+        select * from ls_task
+        <where>
+            <if test="description != null and description != ''">
+                and description like CONCAT ('%',#{description},'%')
+            </if>
+            <if test="dutyId != 0">
+                and duty_id = #{dutyId}
+            </if>
+            <if test="userName != null and userName != ''">
+                and user_name like CONCAT ('%',#{userName},'%')
+            </if>
+            <if test="publishTimeStart != null">
+                and publish_time <![CDATA[ >= ]]> #{publishTimeStart}
+            </if>
+            <if test="publishTimeEnd != null">
+                and publish_time <![CDATA[ <= ]]> #{publishTimeEnd}
+            </if>
+        </where>
+    </select>
+    <select id="selectById" resultType="com.han.ls.project.domain.Task">
+        select *
+        from ls_task
+        where id = #{id}
+    </select>
+
+</mapper>

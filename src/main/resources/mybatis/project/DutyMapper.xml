@@ -5,4 +5,8 @@
 <mapper namespace="com.han.ls.project.mapper.DutyMapper">
 
 
-</mapper> 
+    <select id="allDuty" resultType="com.han.ls.project.domain.Duty">
+        select *
+        from ls_duty
+    </select>
+</mapper>

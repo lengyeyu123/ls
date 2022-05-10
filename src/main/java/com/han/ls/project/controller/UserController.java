@@ -2,7 +2,7 @@ package com.han.ls.project.controller;
 
 import com.han.ls.framework.web.domain.R;
 import com.han.ls.project.service.UserService;
-import com.han.ls.project.vo.req.BindPhoneReqVo;
+import com.han.ls.project.vo.req.UpdateUserInfoReqVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,9 +26,8 @@ public class UserController {
      * @return
      */
     @PostMapping("/updateUserInfo")
-    public R updateUserInfo(@RequestBody BindPhoneReqVo reqVo) {
-        userService.updateUserInfo(reqVo);
-        return R.success();
+    public R updateUserInfo(@RequestBody UpdateUserInfoReqVo reqVo) {
+        return R.success(userService.updateUserInfo(reqVo));
     }
 
 }

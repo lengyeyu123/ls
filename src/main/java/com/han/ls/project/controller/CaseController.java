@@ -1,8 +1,15 @@
 package com.han.ls.project.controller;
 
+import com.github.pagehelper.PageInfo;
+import com.han.ls.framework.web.domain.R;
 import com.han.ls.project.service.CaseService;
+import com.han.ls.project.vo.req.AddCaseReqVo;
+import com.han.ls.project.vo.req.CaseListReqVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,6 +19,17 @@ import org.springframework.web.bind.annotation.RestController;
 public class CaseController {
 
     @Autowired
-    private CaseService caseServicea;
+    private CaseService caseService;
+
+    @PostMapping("/add")
+    public R add(@RequestBody @Validated AddCaseReqVo reqVo) {
+        caseService.add(reqVo);
+        return R.success();
+    }
+
+    @PostMapping("/list")
+    public R list(@RequestBody CaseListReqVo reqVo) {
+        return R.success(new PageInfo<>(caseService.list(reqVo)));
+    }
 
 }

@@ -8,6 +8,8 @@ ls:
   copyrightYear: 2022
   # 文件路径 示例（ Windows配置D:/ruoyi/uploadPath，Linux配置 /home/ruoyi/uploadPath）
   # profile: D:/ls/uploadPath
+  uploadFilePathWinPrefix: D:/ls/upload/
+  uploadFilePathLinuxPrefix: /usr/local/ls/upload/
 
 # 开发环境配置
 server:
@@ -67,9 +69,10 @@ spring:
   servlet:
     multipart:
       # 单个文件大小
-      max-file-size:  10MB
+      max-file-size: 10MB
       # 设置总上传的文件大小
-      max-request-size:  20MB
+      max-request-size: 10MB
+      enabled: true
   # 服务模块
   devtools:
     restart:

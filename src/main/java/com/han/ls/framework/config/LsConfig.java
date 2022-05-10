@@ -22,6 +22,12 @@ public class LsConfig {
      */
     private String copyrightYear;
 
+    /**
+     * 上传图片保存文件夹路径
+     */
+    private String uploadFilePathWinPrefix;
+    private String uploadFilePathLinuxPrefix;
+
 
     public String getName() {
         return name;
@@ -47,4 +53,19 @@ public class LsConfig {
         this.copyrightYear = copyrightYear;
     }
 
+    public String getUploadFilePathWinPrefix() {
+        return uploadFilePathWinPrefix;
+    }
+
+    public void setUploadFilePathWinPrefix(String uploadFilePathWinPrefix) {
+        this.uploadFilePathWinPrefix = uploadFilePathWinPrefix;
+    }
+
+    public String getUploadFilePathLinuxPrefix() {
+        return uploadFilePathLinuxPrefix;
+    }
+
+    public void setUploadFilePathLinuxPrefix(String uploadFilePathLinuxPrefix) {
+        this.uploadFilePathLinuxPrefix = uploadFilePathLinuxPrefix;
+    }
 }

@@ -27,7 +27,7 @@ public class AddressController {
     }
 
     @GetMapping("/selectCityByProvinceId")
-    public R<List<City>> selectCityByProvinceId(int id) {
+    public R<List<City>> selectCityByProvinceId(Integer id) {
         return R.success(addressService.selectCityByProvinceId(id));
     }
 

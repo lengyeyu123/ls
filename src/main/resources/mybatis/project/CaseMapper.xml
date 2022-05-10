@@ -5,4 +5,22 @@
 <mapper namespace="com.han.ls.project.mapper.CaseMapper">
 
 
-</mapper> 
+    <insert id="add" parameterType="com.han.ls.project.domain.Case">
+        insert into ls_case (user_id, description, address, desc_imgs)
+        values (#{userId}, #{description}, #{address}, #{descImgs})
+    </insert>
+    <select id="list" parameterType="com.han.ls.project.vo.req.CaseListReqVo"
+            resultType="com.han.ls.project.domain.Case">
+        select ls_case.*
+        from ls_case, ls_user
+        <where>
+            ls_case.user_id = ls_user.id
+            <if test="userName != null and userName != ''">
+                and userName like CONCAT ('%', #{userName}, '%')
+            </if>
+            <if test="description != null and description != ''">
+                and description like CONCAT ('%',#{description},'%')
+            </if>
+        </where>
+    </select>
+</mapper>

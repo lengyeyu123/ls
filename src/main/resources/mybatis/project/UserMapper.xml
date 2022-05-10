@@ -13,7 +13,16 @@
                 address = #{address},
             </if>
             <if test="countyId != 0">
-                countyId = #{countyId},
+                county_id = #{countyId},
+            </if>
+            <if test="wxCode != null and wxCode != ''">
+                wx_code = #{wxCode},
+            </if>
+            <if test="dutyId != 0">
+                duty_id = #{dutyId},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
             </if>
         </set>
         where id = #{id}
