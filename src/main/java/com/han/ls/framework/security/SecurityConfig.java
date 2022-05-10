@@ -34,7 +34,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/swagger-resources/**",
                         "/v3/**",
                         "/lsImgUpload/**",
-                        "/favicon.ico"
+                        "/favicon.ico",
+                        "/case/list",
+                        "/task/list"
                 ).permitAll()
                 .anyRequest().authenticated()
                 .and().formLogin().disable();
