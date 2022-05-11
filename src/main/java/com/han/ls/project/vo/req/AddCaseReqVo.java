@@ -12,6 +12,8 @@ public class AddCaseReqVo {
     @NotBlank
     private String description;
 
+    private Integer countyId;
+
     private String address;
 
     @NotNull

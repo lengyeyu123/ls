@@ -8,10 +8,7 @@ import com.han.ls.project.vo.req.CaseListReqVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/case")
@@ -30,6 +27,18 @@ public class CaseController {
     @PostMapping("/list")
     public R list(@RequestBody @Validated CaseListReqVo reqVo) {
         return R.success(new PageInfo<>(caseService.list(reqVo)));
+    }
+
+    @GetMapping("/collect")
+    public R collect(int caseId) {
+        caseService.collectCase(caseId);
+        return R.success();
+    }
+
+    @GetMapping("/unCollect")
+    public R unCollect(int caseId) {
+        caseService.unCollectCase(caseId);
+        return R.success();
     }
 
 }

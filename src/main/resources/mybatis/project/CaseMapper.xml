@@ -6,9 +6,19 @@
 
 
     <insert id="add" parameterType="com.han.ls.project.domain.Case">
-        insert into ls_case (user_id, description, address, desc_imgs)
-        values (#{userId}, #{description}, #{address}, #{descImgs})
+        insert into ls_case (user_id, description, county_id, address, desc_imgs)
+        values (#{userId}, #{description}, #{countyId}, #{address}, #{descImgs})
     </insert>
+    <insert id="collectCase" parameterType="com.han.ls.project.domain.UserCase">
+        insert into ls_user_case (user_id, case_id, create_time)
+        values (#{userId}, #{caseId}, #{createTime})
+    </insert>
+    <delete id="unCollectCase">
+        delete
+        from ls_user_case
+        where user_id = #{userId}
+          and case_id = #{caseId}
+    </delete>
     <select id="list" parameterType="com.han.ls.project.vo.req.CaseListReqVo"
             resultType="com.han.ls.project.domain.Case">
         select ls_case.*
@@ -22,5 +32,16 @@
                 and description like CONCAT ('%',#{description},'%')
             </if>
         </where>
+    </select>
+    <select id="selectUserCase" resultType="com.han.ls.project.domain.UserCase">
+        select *
+        from ls_user_case
+        where user_id = #{userId}
+        <if test="caseIdList != null and caseIdList.size() > 0">
+            and
+            <foreach collection="caseIdList" item="caseId" separator="or" open="(" close=")">
+                case_id = #{caseId}
+            </foreach>
+        </if>
     </select>
 </mapper>

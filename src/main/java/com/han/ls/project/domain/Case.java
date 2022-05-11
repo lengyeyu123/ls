@@ -15,11 +15,18 @@ public class Case {
 
     private String description;
 
+    private int countyId;
+
     private String address;
 
     private String descImgs;
 
     // 前端返回拼接字段
     private List<String> imgArr;
+
+    /**
+     * 收藏标志
+     */
+    private boolean collectFlag;
 
 }
