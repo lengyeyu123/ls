@@ -11,8 +11,9 @@ import java.util.List;
 @Data
 public class FinishTaskReqVo {
 
+    @NotNull
     @Min(1)
-    private int taskId;
+    private Integer taskId;
 
     private Date finishTime;
 

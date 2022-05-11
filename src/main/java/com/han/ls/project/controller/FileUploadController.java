@@ -39,7 +39,7 @@ public class FileUploadController {
     @SneakyThrows
     @PostMapping("/image/batch")
     public R handleImagesUpload(@RequestParam(required = false, name = "files") MultipartFile[] files,
-                                @RequestParam(required = true, name = "fileType") String fileType) {
+                                @RequestParam(name = "fileType") String fileType) {
         if (files.length == 0) {
             throw new ServiceException("上传文件为空，请选择文件");
         }

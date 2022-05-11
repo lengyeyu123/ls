@@ -12,7 +12,7 @@ public class LoginReqVo {
     private String iv;
 
     /**
-     * 没有申请好小程序以前传此参数
+     * TODO 没有申请好小程序以前传此参数
      */
     private String openId;
 

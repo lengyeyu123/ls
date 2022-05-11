@@ -2,6 +2,8 @@ package com.han.ls.project.vo.req;
 
 import lombok.Data;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Data
@@ -18,8 +20,12 @@ public class TaskListReqVo {
     private Date publishTimeEnd;
 
     // 分页
-    private int page = 1;
+    @NotNull
+    @Min(1)
+    private Integer page;
 
-    private int pageSize = 10;
+    @NotNull
+    @Min(1)
+    private Integer pageSize;
 
 }
