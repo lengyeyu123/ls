@@ -30,7 +30,7 @@ public class TaskController {
     }
 
     @PostMapping("/list")
-    public R<?> list(@RequestBody @Validated TaskListReqVo reqVo) {
+    public R list(@RequestBody @Validated TaskListReqVo reqVo) {
         return R.success(new PageInfo<>(taskService.list(reqVo)));
     }
 

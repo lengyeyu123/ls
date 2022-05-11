@@ -1,14 +1,12 @@
 package com.han.ls.project.controller;
 
 import com.han.ls.framework.web.domain.R;
+import com.han.ls.project.domain.User;
 import com.han.ls.project.service.UserService;
 import com.han.ls.project.vo.req.UpdateUserInfoReqVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/user")
@@ -20,14 +18,17 @@ public class UserController {
 
     /**
      * 更新用户的基本信息
-     * TODO 发送验证码验证手机号是否正确
-     *
      * @param reqVo
      * @return
      */
     @PostMapping("/updateUserInfo")
     public R updateUserInfo(@RequestBody UpdateUserInfoReqVo reqVo) {
         return R.success(userService.updateUserInfo(reqVo));
+    }
+
+    @GetMapping("/getUser")
+    public R<User> getUser(int userId) {
+        return R.success(userService.getUser(userId));
     }
 
 }

@@ -17,14 +17,13 @@ public class TestController {
     @Autowired
     private UserService userService;
 
-
     @GetMapping("/test")
     public Object test() {
         return userService.list();
     }
 
     @GetMapping("/addUser")
-    public R<?> addUser(String userName) {
+    public R addUser(String userName) {
         userService.add(userName);
         return R.success();
     }

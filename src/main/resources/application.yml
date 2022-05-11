@@ -125,8 +125,8 @@ token:
 wx:
   miniapp:
     configs:
-      - appid: aaaa  #微信小程序的appid
-        secret: bbbb #微信小程序的Secret  原secret
+      - appid: wxc85c4631d823caf3  #微信小程序的appid
+        secret: a6a4ce4ad7d9b419712094dc91f1ea17 #微信小程序的Secret  原secret
         token: #微信小程序消息服务器配置的token
         aesKey: #微信小程序消息服务器配置的EncodingAESKey
         msgDataFormat: JSON

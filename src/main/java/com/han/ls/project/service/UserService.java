@@ -77,4 +77,8 @@ public class UserService {
         userMapper.updateUserInfo(loginUser);
         return loginUser;
     }
+
+    public User getUser(int userId) {
+        return userMapper.selectById(userId);
+    }
 }
