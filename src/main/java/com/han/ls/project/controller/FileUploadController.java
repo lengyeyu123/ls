@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Slf4j
 @RestController
@@ -63,7 +64,8 @@ public class FileUploadController {
 
         User loginUser = LsUtils.getLoginUser();
         List<String> visitBaseUrlList = new ArrayList<>();
-        String fileBaseName = DateUtils.dateTimeNow();
+        // String fileBaseName = DateUtils.dateTimeNow();
+        String fileBaseName = UUID.randomUUID().toString().replaceAll("-", "");
         for (int i = 0; i < files.length; i++) {
             MultipartFile file = files[i];
             String fileName = file.getOriginalFilename();

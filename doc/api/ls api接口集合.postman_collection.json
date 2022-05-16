@@ -1,0 +1,460 @@
+{
+	"info": {
+		"_postman_id": "2f4b74af-21a3-4b51-8c5e-ed7418bb5363",
+		"name": "ls api接口集合",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "模拟登陆openId设置为'1'",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJvcGVuaWQiOiJvSXg4YTBhb1QwQXEzbFNDZXhCTEpyVUFOQjk0Iiwic2NoS2V5IjoiMDAwIiwiZXhwIjoxNjQ4NDUzMTAzLCJzdGF0dXMiOiLlrrbplb8ifQ.Q8a8JtWADvtAlVp4nI8A6eCY5gh5D9IKzyZ8Uju6xzGTNW6GdPYxcoktJXewFJmiyxl1lHb3xIAF-J_b4eJhiw",
+						"type": "default",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"openId\": \"1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "获取全部省份",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/address/allProvince",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"address",
+						"allProvince"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "获取全部市",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJvcGVuSWQiOiIxIiwidXNlck5hbWUiOiLlvKDkuIkiLCJleHAiOjE2NTI3NDc5MDF9.FYF7fXWywN4spnv5WQHm8ujt0Z1YFThm-IVv2i-zAbqiFFPXdZWAZUkIAsGPPagD0cxi2Kdzvt4zFY51dqH-wg",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/address/selectCityByProvinceId?id=3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"address",
+						"selectCityByProvinceId"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "获取全部区县",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accessToken",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJvcGVuSWQiOiIxIiwidXNlck5hbWUiOiLlvKDkuIkiLCJleHAiOjE2NTI3NDc5MDF9.FYF7fXWywN4spnv5WQHm8ujt0Z1YFThm-IVv2i-zAbqiFFPXdZWAZUkIAsGPPagD0cxi2Kdzvt4zFY51dqH-wg",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "javascript"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/address/selectCountyByCityId?id=13",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"address",
+						"selectCountyByCityId"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "13"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "更新用户地址手机号等信息 更新成功需要更新本地缓存",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"phone\": \"18333603120\",\r\n    \"address\":\"永安\",\r\n    \"countyId\": 199\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/user/updateUserInfo",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"user",
+						"updateUserInfo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "新增任务",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"description\": \"描述\",\r\n    \"descImgArr\": [\"aaa\", \"bbb\"],\r\n    \"deadline\": \"2020-02-29 12:23:10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/task/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"task",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "获取任务列表",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"page\": 1,\r\n    \"pageSize\": 10\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/task/list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"task",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "图片上传",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "fileType",
+							"value": "case",
+							"type": "default"
+						},
+						{
+							"key": "files",
+							"type": "file",
+							"src": [
+								"/C:/Users/lxh/Desktop/111.png",
+								"/C:/Users/lxh/Desktop/121.png"
+							]
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/file/image/batch",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"file",
+						"image",
+						"batch"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "新增案例",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"description\": \"描述222ds2323\",\r\n    \"descImgArr\": [\"aa4a\", \"bb4b\"],\r\n    \"address\": \"案例的详细地址\",\r\n    \"countyId\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/case/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"case",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "获取案例列表",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"page\": 1,\r\n    \"pageSize\": 10\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/case/list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"case",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "收藏案例",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/case/collect?caseId=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"case",
+						"collect"
+					],
+					"query": [
+						{
+							"key": "caseId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "取消收藏案例",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/case/unCollect?caseId=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"case",
+						"unCollect"
+					],
+					"query": [
+						{
+							"key": "caseId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "value",
+				"value": "eyJhbGciOiJIUzUxMiJ9.eyJvcGVuSWQiOiIxIiwidXNlck5hbWUiOiLlvKDkuIkiLCJleHAiOjE2NTI4MzMxMjN9.sgKZXrNdhSSNh-_sOTqlWZRqjuk1SvEW_N3kAaUJCgpRFyCBc316SI_lUTkwH-8IJ710lWT9hYSNPhD2h1ZTdw",
+				"type": "string"
+			},
+			{
+				"key": "in",
+				"value": "header",
+				"type": "string"
+			},
+			{
+				"key": "key",
+				"value": "accessToken",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

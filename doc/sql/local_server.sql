@@ -11,7 +11,7 @@
  Target Server Version : 50540
  File Encoding         : 65001
 
- Date: 10/05/2022 17:55:48
+ Date: 11/05/2022 15:50:55
 */
 
 SET NAMES utf8mb4;
@@ -3253,14 +3253,19 @@ CREATE TABLE `ls_case`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NULL DEFAULT NULL,
   `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `county_id` int(11) NULL DEFAULT NULL,
   `address` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `desc_imgs` varchar(800) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of ls_case
 -- ----------------------------
+INSERT INTO `ls_case` VALUES (1, 1, '描述', NULL, '案例的详细地址', '[\"aaa\",\"bbb\"]');
+INSERT INTO `ls_case` VALUES (2, 1, '描述2323', NULL, '案例的详细地址', '[\"aaa\",\"bbb\"]');
+INSERT INTO `ls_case` VALUES (3, 1, '描述2222323', 0, '案例的详细地址', '[\"aa4a\",\"bb4b\"]');
+INSERT INTO `ls_case` VALUES (4, 1, '描述222ds2323', 1, '案例的详细地址', '[\"aa4a\",\"bb4b\"]');
 
 -- ----------------------------
 -- Table structure for ls_city
@@ -6592,5 +6597,22 @@ CREATE TABLE `ls_user`  (
 -- ----------------------------
 INSERT INTO `ls_user` VALUES (1, '张三', NULL, '18333603120', NULL, '1', NULL, NULL, NULL, NULL, NULL, 199, '永安', NULL, NULL, '2022-05-07 23:02:54', NULL, '1');
 INSERT INTO `ls_user` VALUES (2, '李四', NULL, NULL, NULL, '2', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-05-07 23:02:54', NULL, '1');
+
+-- ----------------------------
+-- Table structure for ls_user_case
+-- ----------------------------
+DROP TABLE IF EXISTS `ls_user_case`;
+CREATE TABLE `ls_user_case`  (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NULL DEFAULT NULL,
+  `case_id` int(11) NULL DEFAULT NULL,
+  `create_time` datetime NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Records of ls_user_case
+-- ----------------------------
+INSERT INTO `ls_user_case` VALUES (2, 1, 1, '2022-05-11 15:16:31');
 
 SET FOREIGN_KEY_CHECKS = 1;

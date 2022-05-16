@@ -42,8 +42,14 @@ public class LoginService {
     @Autowired
     private WxMaProperties wxMaProperties;
 
+    /**
+     * 登录
+     * @param reqVo
+     * @return
+     */
     public LoginRespVo login(LoginReqVo reqVo) {
         WxMaUserInfo wxMaUserInfo = null;
+        // 测试账号openId有值
         if (StringUtils.isBlank(reqVo.getOpenId())) {
             wxMaUserInfo = getWxMaUserInfo(reqVo.getCode(), reqVo.getEncryptedData(), reqVo.getIv());
         }
