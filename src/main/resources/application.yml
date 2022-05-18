@@ -10,6 +10,7 @@ ls:
   # profile: D:/ls/uploadPath
   uploadFilePathWinPrefix: D:/ls/upload/
   uploadFilePathLinuxPrefix: /usr/local/ls/upload/
+  serverBaseUrl: http://localhost
 
 # 开发环境配置
 server:
@@ -69,7 +70,7 @@ spring:
   servlet:
     multipart:
       # 单个文件大小
-      max-file-size: 10MB
+      max-file-size: 2MB
       # 设置总上传的文件大小
       max-request-size: 10MB
       enabled: true

@@ -9,7 +9,14 @@ public enum ResultStatus {
 
     ERROR(50000, "服务器内部错误"),
 
-    INVALID_TOKEN(50401, "登录过期，请重新登录");
+    INVALID_TOKEN(50401, "登录过期，请重新登录"),
+
+    USER_STATUS_DISABLED(50101, "已被禁用"),
+
+    VIOLATION_CONTENT(50102, "您上传的内容不安全，请重新编辑后上传"),
+
+    ;
+
 
     //用户模块错误码 50100~50199
     //商品模块错误码 50200~50299

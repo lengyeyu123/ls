@@ -22,7 +22,7 @@ public class UserController {
      * @return
      */
     @PostMapping("/updateUserInfo")
-    public R updateUserInfo(@RequestBody UpdateUserInfoReqVo reqVo) {
+    public R<?> updateUserInfo(@RequestBody UpdateUserInfoReqVo reqVo) {
         return R.success(userService.updateUserInfo(reqVo));
     }
 
@@ -30,5 +30,16 @@ public class UserController {
     public R<User> getUser(int userId) {
         return R.success(userService.getUser(userId));
     }
+
+    /**
+     * 禁用用户
+     */
+    @GetMapping("/disabled")
+    public R<?> disabled(int userId) {
+        userService.disabled(userId);
+        return R.success();
+    }
+
+
 
 }

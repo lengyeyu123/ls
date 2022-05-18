@@ -28,6 +28,11 @@ public class LsConfig {
     private String uploadFilePathWinPrefix;
     private String uploadFilePathLinuxPrefix;
 
+    /**
+     * 本服务访问基础路径
+     */
+    private String serverBaseUrl;
+
 
     public String getName() {
         return name;
@@ -67,5 +72,13 @@ public class LsConfig {
 
     public void setUploadFilePathLinuxPrefix(String uploadFilePathLinuxPrefix) {
         this.uploadFilePathLinuxPrefix = uploadFilePathLinuxPrefix;
+    }
+
+    public String getServerBaseUrl() {
+        return serverBaseUrl;
+    }
+
+    public void setServerBaseUrl(String serverBaseUrl) {
+        this.serverBaseUrl = serverBaseUrl;
     }
 }

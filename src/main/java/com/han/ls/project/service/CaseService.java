@@ -1,7 +1,14 @@
 package com.han.ls.project.service;
 
+import cn.binarywang.wx.miniapp.api.WxMaService;
+import cn.binarywang.wx.miniapp.bean.security.WxMaMsgSecCheckCheckRequest;
+import cn.binarywang.wx.miniapp.bean.security.WxMaMsgSecCheckCheckResponse;
 import com.github.pagehelper.PageHelper;
+import com.han.ls.common.enums.ResultStatus;
+import com.han.ls.common.exception.ServiceException;
 import com.han.ls.common.utils.JsonUtils;
+import com.han.ls.framework.config.WxMaConfiguration;
+import com.han.ls.framework.config.properties.WxMaProperties;
 import com.han.ls.framework.utils.LsUtils;
 import com.han.ls.project.domain.Case;
 import com.han.ls.project.domain.User;
@@ -9,6 +16,7 @@ import com.han.ls.project.domain.UserCase;
 import com.han.ls.project.mapper.CaseMapper;
 import com.han.ls.project.vo.req.AddCaseReqVo;
 import com.han.ls.project.vo.req.CaseListReqVo;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,10 +31,37 @@ import java.util.stream.Collectors;
 public class CaseService {
 
     @Autowired
+    private WxMaProperties wxMaProperties;
+
+    @Autowired
     private CaseMapper caseMapper;
 
+    @SneakyThrows
     public void add(AddCaseReqVo reqVo) {
         User loginUser = LsUtils.getLoginUser();
+
+        // 验证用户上传信息是否安全
+        List<WxMaProperties.Config> configs = this.wxMaProperties.getConfigs();
+        // appid
+        String appid = configs.get(0).getAppid();
+        // 只有一个小程序的配置
+        WxMaService maService = WxMaConfiguration.getMaService(appid);
+
+        WxMaMsgSecCheckCheckResponse checkResponse = maService.getSecCheckService().checkMessage(WxMaMsgSecCheckCheckRequest.builder()
+                .version("2")
+                .openid(loginUser.getOpenId())
+                .scene(2)
+                .content(reqVo.getDescription())
+                .build());
+        log.info("===checkResponse {}", checkResponse);
+
+        WxMaMsgSecCheckCheckResponse.ResultBean checkResult = checkResponse.getResult();
+        log.info("===checkResult {}", checkResult);
+
+        if (!checkResult.getLabel().equals("100")) {
+            throw new ServiceException(ResultStatus.VIOLATION_CONTENT);
+        }
+
         Case aCase = new Case()
                 .setUserId(loginUser.getId())
                 .setDescription(reqVo.getDescription())

@@ -27,6 +27,9 @@
         </set>
         where id = #{id}
     </update>
+    <update id="disabled">
+        update ls_user set available = '0' where id = #{id}
+    </update>
     <select id="list" resultType="com.han.ls.project.domain.User">
         select *
         from ls_user

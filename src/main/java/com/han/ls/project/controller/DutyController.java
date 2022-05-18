@@ -5,9 +5,8 @@ import com.han.ls.project.domain.Duty;
 import com.han.ls.project.service.DutyService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,9 +18,21 @@ public class DutyController {
     @Autowired
     private DutyService dutyService;
 
-    @GetMapping("allDuty")
-    public R<List<Duty>> allDuty() {
-        return R.success(dutyService.allDuty());
+    @GetMapping("all")
+    public R<List<Duty>> all() {
+        return R.success(dutyService.all());
+    }
+
+    @PostMapping("/add")
+    public R<?> add(@RequestBody @Validated Duty duty) {
+        dutyService.add(duty);
+        return R.success();
+    }
+
+    @PostMapping("/update")
+    public R<?> update(@RequestBody Duty duty) {
+        dutyService.update(duty);
+        return R.success();
     }
 
 }

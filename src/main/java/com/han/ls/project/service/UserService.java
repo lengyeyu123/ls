@@ -38,12 +38,20 @@ public class UserService {
     }
 
     public User register(WxMaUserInfo wxMaUserInfo) {
-        String openId = wxMaUserInfo.getOpenId();
-        String unionId = wxMaUserInfo.getUnionId();
-        String avatarUrl = wxMaUserInfo.getAvatarUrl();
-        String nickName = wxMaUserInfo.getNickName();
         User user = new User();
-        user.setUserName(nickName).setOpenId(openId).setUnionId(unionId).setAvatarUrl(avatarUrl).setCreateTime(new Date());
+        String openId = wxMaUserInfo.getOpenId();
+        user.setOpenId(openId);
+        String unionId = wxMaUserInfo.getUnionId();
+        if (StringUtils.isNotBlank(wxMaUserInfo.getUnionId())) {
+            user.setUnionId(unionId);
+        }
+        if (StringUtils.isNotBlank(wxMaUserInfo.getAvatarUrl())) {
+            user.setAvatarUrl(wxMaUserInfo.getAvatarUrl());
+        }
+        if (StringUtils.isNotBlank(wxMaUserInfo.getNickName())) {
+            user.setUserName(wxMaUserInfo.getNickName());
+        }
+        user.setCreateTime(new Date());
         userMapper.register(user);
         return user;
     }
@@ -80,5 +88,9 @@ public class UserService {
 
     public User getUser(int userId) {
         return userMapper.selectById(userId);
+    }
+
+    public void disabled(int userId) {
+        userMapper.disabled(userId);
     }
 }

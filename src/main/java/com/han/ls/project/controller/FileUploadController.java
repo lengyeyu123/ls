@@ -1,9 +1,13 @@
 package com.han.ls.project.controller;
 
+import cn.binarywang.wx.miniapp.api.WxMaService;
 import com.han.ls.common.constant.LsConstants;
+import com.han.ls.common.enums.ResultStatus;
 import com.han.ls.common.exception.ServiceException;
 import com.han.ls.common.utils.DateUtils;
 import com.han.ls.framework.config.LsConfig;
+import com.han.ls.framework.config.WxMaConfiguration;
+import com.han.ls.framework.config.properties.WxMaProperties;
 import com.han.ls.framework.utils.LsUtils;
 import com.han.ls.framework.web.domain.R;
 import com.han.ls.project.domain.User;
@@ -30,6 +34,9 @@ public class FileUploadController {
     @Autowired
     private LsConfig lsConfig;
 
+    @Autowired
+    private WxMaProperties wxMaProperties;
+
     /**
      * fullFilePath = FILE_UPLOAD_PATH + relativePath + newFileName;
      *
@@ -39,8 +46,7 @@ public class FileUploadController {
      */
     @SneakyThrows
     @PostMapping("/image/batch")
-    public R handleImagesUpload(@RequestParam(required = false, name = "files") MultipartFile[] files,
-                                @RequestParam(name = "fileType") String fileType) {
+    public R<List<String>> handleImagesUpload(@RequestParam(required = false, name = "files") MultipartFile[] files, @RequestParam(name = "fileType") String fileType) {
         if (files.length == 0) {
             throw new ServiceException("上传文件为空，请选择文件");
         }
@@ -85,7 +91,35 @@ public class FileUploadController {
 
             visitBaseUrlList.add(LsConstants.FILE_VISIT_PREFIX + relativePath + newFileName);
         }
-        return R.success(visitBaseUrlList);
+
+        boolean checkImgPass = true;
+        // 验证图片是否安全
+        for (String visitBaseUrl : visitBaseUrlList) {
+            if (!checkImage(visitBaseUrl)) {
+                // 未通过检测
+                checkImgPass = false;
+                break;
+            }
+        }
+        if (checkImgPass) {
+            return R.success(visitBaseUrlList);
+        } else {
+            throw new ServiceException(ResultStatus.VIOLATION_CONTENT);
+        }
+    }
+
+    /**
+     * 检测图片内容是否安全
+     */
+    @SneakyThrows
+    private boolean checkImage(String visitBaseUrl) {
+        // 验证用户上传信息是否安全
+        List<WxMaProperties.Config> configs = this.wxMaProperties.getConfigs();
+        // appid
+        String appid = configs.get(0).getAppid();
+        // 只有一个小程序的配置
+        WxMaService maService = WxMaConfiguration.getMaService(appid);
+        return maService.getSecCheckService().checkImage(lsConfig.getServerBaseUrl() + visitBaseUrl);
     }
 
 

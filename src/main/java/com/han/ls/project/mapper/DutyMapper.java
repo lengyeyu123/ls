@@ -6,6 +6,9 @@ import java.util.List;
 
 public interface DutyMapper {
 
-    List<Duty> allDuty();
+    List<Duty> all();
 
+    void add(Duty duty);
+
+    void update(Duty duty);
 }

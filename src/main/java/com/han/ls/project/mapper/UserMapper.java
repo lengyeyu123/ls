@@ -17,4 +17,6 @@ public interface UserMapper {
     void register(User user);
 
     void updateUserInfo(User loginUser);
+
+    void disabled(int userId);
 }

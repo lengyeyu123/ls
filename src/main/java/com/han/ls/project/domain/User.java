@@ -43,6 +43,6 @@ public class User {
 
     private Date updateTime;
 
-    private String disabledFlag;
+    private String available;
 
 }

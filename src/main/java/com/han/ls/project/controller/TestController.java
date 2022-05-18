@@ -23,7 +23,7 @@ public class TestController {
     }
 
     @GetMapping("/addUser")
-    public R addUser(String userName) {
+    public R<?> addUser(String userName) {
         userService.add(userName);
         return R.success();
     }

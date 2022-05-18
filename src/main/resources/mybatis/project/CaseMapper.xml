@@ -17,7 +17,7 @@
         delete
         from ls_user_case
         where user_id = #{userId}
-          and case_id = #{caseId}
+        and case_id = #{caseId}
     </delete>
     <select id="list" parameterType="com.han.ls.project.vo.req.CaseListReqVo"
             resultType="com.han.ls.project.domain.Case">

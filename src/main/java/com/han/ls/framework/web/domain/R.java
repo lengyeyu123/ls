@@ -6,6 +6,7 @@ import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 @Data
 public class R<T> implements Serializable {
@@ -69,12 +70,17 @@ public class R<T> implements Serializable {
 
     public static <T> R<T> error(ServiceException e) {
         R<T> r = new R<>();
-        if (StringUtils.isNotBlank(e.getMsg())) {
-            r.setCode(ResultStatus.ERROR.getCode());
-            r.setMsg(e.getMsg());
+        if (Objects.isNull(e.getResultStatus())) {
+            if (StringUtils.isNotBlank(e.getMsg())) {
+                r.setCode(ResultStatus.ERROR.getCode());
+                r.setMsg(e.getMsg());
+            } else {
+                r.setCode(ResultStatus.ERROR.getCode());
+                r.setMsg(ResultStatus.ERROR.getMsg());
+            }
         } else {
-            r.setCode(ResultStatus.ERROR.getCode());
-            r.setMsg(ResultStatus.ERROR.getMsg());
+            r.setCode(e.getResultStatus().getCode());
+            r.setMsg(e.getResultStatus().getMsg());
         }
         return r;
     }

@@ -7,9 +7,9 @@ public class LoginReqVo {
 
     private String code;
 
-    private String encryptedData;
+    // private String encryptedData;
 
-    private String iv;
+    // private String iv;
 
     /**
      * '1' '2' 为测试账户

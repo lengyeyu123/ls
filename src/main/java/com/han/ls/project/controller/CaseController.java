@@ -19,24 +19,24 @@ public class CaseController {
     private CaseService caseService;
 
     @PostMapping("/add")
-    public R add(@RequestBody @Validated AddCaseReqVo reqVo) {
+    public R<?> add(@RequestBody @Validated AddCaseReqVo reqVo) {
         caseService.add(reqVo);
         return R.success();
     }
 
     @PostMapping("/list")
-    public R list(@RequestBody @Validated CaseListReqVo reqVo) {
+    public R<?> list(@RequestBody @Validated CaseListReqVo reqVo) {
         return R.success(new PageInfo<>(caseService.list(reqVo)));
     }
 
     @GetMapping("/collect")
-    public R collect(int caseId) {
+    public R<?> collect(int caseId) {
         caseService.collectCase(caseId);
         return R.success();
     }
 
     @GetMapping("/unCollect")
-    public R unCollect(int caseId) {
+    public R<?> unCollect(int caseId) {
         caseService.unCollectCase(caseId);
         return R.success();
     }

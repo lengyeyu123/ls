@@ -3,6 +3,8 @@ package com.han.ls.project.service;
 import cn.binarywang.wx.miniapp.api.WxMaService;
 import cn.binarywang.wx.miniapp.bean.WxMaJscode2SessionResult;
 import cn.binarywang.wx.miniapp.bean.WxMaUserInfo;
+import com.han.ls.common.constant.LsConstants;
+import com.han.ls.common.enums.ResultStatus;
 import com.han.ls.common.exception.ServiceException;
 import com.han.ls.framework.config.WxMaConfiguration;
 import com.han.ls.framework.config.properties.WxMaProperties;
@@ -34,30 +36,47 @@ public class LoginService {
     private UserService userService;
 
     @Autowired
-    private UserMapper userMapper;
-
-    @Autowired
     private TokenService tokenService;
 
     @Autowired
     private WxMaProperties wxMaProperties;
 
+    @Autowired
+    private UserMapper userMapper;
+
     /**
      * 登录
+     *
      * @param reqVo
      * @return
      */
     public LoginRespVo login(LoginReqVo reqVo) {
-        WxMaUserInfo wxMaUserInfo = null;
-        // 测试账号openId有值
+        String openId;
+        WxMaUserInfo wxMaUserInfo;
         if (StringUtils.isBlank(reqVo.getOpenId())) {
-            wxMaUserInfo = getWxMaUserInfo(reqVo.getCode(), reqVo.getEncryptedData(), reqVo.getIv());
+            wxMaUserInfo = getWxMaUserInfo(reqVo.getCode());
+            openId = wxMaUserInfo.getOpenId();
+        } else {
+            openId = reqVo.getOpenId();
+            wxMaUserInfo = new WxMaUserInfo();
+            wxMaUserInfo.setUnionId("测试");
+            wxMaUserInfo.setOpenId(reqVo.getOpenId());
+            wxMaUserInfo.setNickName("测试");
+            wxMaUserInfo.setAvatarUrl("测试");
         }
-        String openId = wxMaUserInfo == null ? reqVo.getOpenId() : wxMaUserInfo.getOpenId();
+
+
         User user = userMapper.selectByOpenId(openId);
         if (user == null) {
             user = userService.register(wxMaUserInfo);
+            user.setAvailable(LsConstants.USER_STATUS_NORMAL);
         }
+        // 用户是否被禁用
+        if (user.getAvailable().equals(LsConstants.USER_STATUS_DISABLED)) {
+            // 用户已经被禁用
+            throw new ServiceException(ResultStatus.USER_STATUS_DISABLED);
+        }
+
         //使用Authentication的实现类
         Authentication authentication = new UsernamePasswordAuthenticationToken(user.getOpenId(), user.getOpenId());
         //手动调用方法去认证 他会自动调用UserDetailsService查 然后对比啥的
@@ -74,7 +93,7 @@ public class LoginService {
     }
 
 
-    private WxMaUserInfo getWxMaUserInfo(String code, String encryptedData, String iv) {
+    private WxMaUserInfo getWxMaUserInfo(String code) {
         List<WxMaProperties.Config> configs = this.wxMaProperties.getConfigs();
         // appid
         String appid = configs.get(0).getAppid();
@@ -83,14 +102,15 @@ public class LoginService {
         // 获取到unionid openid sessionKey
         WxMaJscode2SessionResult jscode2session = null;
         try {
-            jscode2session = WxMaConfiguration.getMaService(appid).jsCode2SessionInfo(code);
+            jscode2session = maService.jsCode2SessionInfo(code);
         } catch (WxErrorException e) {
             log.error("获取微信服务器用户信息失败", e);
         }
-        // 获取微信用户的微信相关信息
-        WxMaUserInfo userInfo = maService.getUserService().getUserInfo(jscode2session.getSessionKey(), encryptedData, iv);
-        userInfo.setOpenId(jscode2session.getOpenid());
-        userInfo.setUnionId(jscode2session.getUnionid());
-        return userInfo;
+        WxMaUserInfo wxMaUserInfo = new WxMaUserInfo();
+        wxMaUserInfo.setOpenId(jscode2session.getOpenid());
+        if (StringUtils.isNotBlank(jscode2session.getUnionid())) {
+            wxMaUserInfo.setUnionId(jscode2session.getUnionid());
+        }
+        return wxMaUserInfo;
     }
 }

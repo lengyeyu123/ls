@@ -24,18 +24,18 @@ public class TaskController {
     private TaskService taskService;
 
     @PostMapping("/add")
-    public R add(@RequestBody @Validated AddTaskReqVo reqVo) {
+    public R<?> add(@RequestBody @Validated AddTaskReqVo reqVo) {
         taskService.add(reqVo);
         return R.success();
     }
 
     @PostMapping("/list")
-    public R list(@RequestBody @Validated TaskListReqVo reqVo) {
+    public R<?> list(@RequestBody @Validated TaskListReqVo reqVo) {
         return R.success(new PageInfo<>(taskService.list(reqVo)));
     }
 
     @PostMapping("/finish")
-    public R finish(@RequestBody @Validated FinishTaskReqVo reqVo) {
+    public R<?> finish(@RequestBody @Validated FinishTaskReqVo reqVo) {
         taskService.finish(reqVo);
         return R.success();
     }
