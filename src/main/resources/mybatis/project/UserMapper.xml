@@ -36,11 +36,7 @@
         select *
         from ls_user
     </select>
-    <select id="selectById" resultType="com.han.ls.project.domain.User">
-        select *
-        from ls_user
-        where id = #{id}
-    </select>
+
 
     <resultMap id="user" type="com.han.ls.project.domain.User">
         <id column="id" property="id"/>
@@ -50,12 +46,12 @@
         <result column="wx_code" property="wxCode"/>
         <result column="open_id" property="openId"/>
         <result column="union_id" property="unionId"/>
-        <result column="avatarUrl" property="avatarUrl"/>
+        <result column="avatar_url" property="avatarUrl"/>
         <result column="remark" property="remark"/>
         <result column="address" property="address"/>
-        <result column="businessType" property="businessType"/>
-        <result column="createTime" property="createTime"/>
-        <result column="updateTime" property="updateTime"/>
+        <result column="business_type" property="businessType"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
         <result column="available" property="available"/>
         <association property="county" javaType="com.han.ls.project.domain.County">
             <id column="county_id" property="id"/>
@@ -74,6 +70,26 @@
             <result column="description" property="description"/>
         </association>
     </resultMap>
+
+    <select id="selectById" resultMap="user">
+        select ls_user.*,
+               ls_duty.id     as duty_id,
+               ls_duty.name   as duty_name,
+               ls_duty.description,
+               ls_county.id   as county_id,
+               ls_county.code,
+               ls_county.name as county_name,
+               ls_county.province_id,
+               ls_county.province_code,
+               ls_county.province_name,
+               ls_county.city_id,
+               ls_county.city_code,
+               ls_county.city_name
+        from ls_user
+                 left join ls_duty on ls_user.duty_id = ls_duty.id
+                 left join ls_county on ls_user.county_id = ls_county.id
+        where ls_user.id = #{id}
+    </select>
 
     <select id="selectByOpenId" resultMap="user">
         select ls_user.*,

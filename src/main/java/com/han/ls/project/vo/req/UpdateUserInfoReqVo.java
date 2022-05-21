@@ -5,6 +5,10 @@ import lombok.Data;
 @Data
 public class UpdateUserInfoReqVo {
 
+    private String userName;
+
+    private String avatarUrl;
+
     private String phone;
 
     private String wxCode;
