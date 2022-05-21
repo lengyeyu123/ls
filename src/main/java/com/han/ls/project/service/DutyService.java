@@ -36,4 +36,8 @@ public class DutyService {
             dutyMapper.update(duty);
         }
     }
+
+    public Duty selectById(int dutyId) {
+        return dutyMapper.selectById(dutyId);
+    }
 }

@@ -11,4 +11,6 @@ public interface DutyMapper {
     void add(Duty duty);
 
     void update(Duty duty);
+
+    Duty selectById(int dutyId);
 }

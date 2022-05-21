@@ -26,4 +26,6 @@ public interface AddressMapper {
     List<City> selectCityByProvinceId(int id);
 
     List<County> selectCountByCityId(int id);
+
+    County selectCountyById(int countyId);
 }

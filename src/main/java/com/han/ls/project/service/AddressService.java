@@ -58,4 +58,7 @@ public class AddressService {
         return addressMapper.selectCountByCityId(id);
     }
 
+    public County selectCountyById(int countyId) {
+        return addressMapper.selectCountyById(countyId);
+    }
 }

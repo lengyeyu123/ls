@@ -35,6 +35,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/v3/**",
                         "/lsImgUpload/**",
                         "/favicon.ico",
+                        "/address/selectCountyByCityId",
+                        "/address/selectCityByProvinceId",
+                        "/address/allProvince",
                         "/case/list",
                         "/task/list"
                 ).permitAll()

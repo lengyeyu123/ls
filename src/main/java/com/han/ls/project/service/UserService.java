@@ -5,6 +5,8 @@ import com.han.ls.common.constant.LsConstants;
 import com.han.ls.common.exception.ServiceException;
 import com.han.ls.common.utils.DateUtils;
 import com.han.ls.framework.utils.LsUtils;
+import com.han.ls.project.domain.County;
+import com.han.ls.project.domain.Duty;
 import com.han.ls.project.domain.User;
 import com.han.ls.project.mapper.UserMapper;
 import com.han.ls.project.vo.req.UpdateUserInfoReqVo;
@@ -18,6 +20,12 @@ import java.util.regex.Pattern;
 
 @Service
 public class UserService {
+
+    @Autowired
+    private AddressService addressService;
+
+    @Autowired
+    private DutyService dutyService;
 
     @Autowired
     private UserMapper userMapper;
@@ -77,10 +85,16 @@ public class UserService {
             }
         }
 
+        if (reqVo.getCountyId() > 0) {
+            County county = addressService.selectCountyById(reqVo.getCountyId());
+            loginUser.setCounty(county);
+        }
+        if (reqVo.getDutyId() > 0) {
+            Duty duty = dutyService.selectById(reqVo.getDutyId());
+            loginUser.setDuty(duty);
+        }
         loginUser.setAddress(reqVo.getAddress())
-                .setCountyId(reqVo.getCountyId())
                 .setWxCode(reqVo.getWxCode())
-                .setDutyId(reqVo.getDutyId())
                 .setUpdateTime(new Date());
         userMapper.updateUserInfo(loginUser);
         return loginUser;

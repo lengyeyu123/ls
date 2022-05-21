@@ -27,17 +27,13 @@ public class User {
 
     private String remark;
 
-    private int provinceId;
-
-    private int cityId;
-
-    private int countyId;
+    private County county;
 
     private String address;
 
     private String businessType;
 
-    private int dutyId;
+    private Duty duty;
 
     private Date createTime;
 

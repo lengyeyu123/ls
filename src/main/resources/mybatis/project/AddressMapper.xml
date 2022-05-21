@@ -80,4 +80,9 @@
         where city_id = #{id}
         order by code
     </select>
+    <select id="selectCountyById" resultType="com.han.ls.project.domain.County">
+        select *
+        from ls_county
+        where id = #{countyId}
+    </select>
 </mapper>

@@ -5,11 +5,11 @@ import lombok.Getter;
 @Getter
 public enum ResultStatus {
 
-    OK(20000, "成功"),
+    OK(0, "成功"),
 
     ERROR(50000, "服务器内部错误"),
 
-    INVALID_TOKEN(50401, "登录过期，请重新登录"),
+    INVALID_TOKEN(-1, "登录过期，请重新登录"),
 
     USER_STATUS_DISABLED(50101, "已被禁用"),
 
@@ -23,11 +23,11 @@ public enum ResultStatus {
     //订单模块错误码 50300~50399
 
     private final Integer code;
-    private final String msg;
+    private final String message;
 
-    ResultStatus(Integer code, String msg) {
+    ResultStatus(Integer code, String message) {
         this.code = code;
-        this.msg = msg;
+        this.message = message;
     }
 
 }

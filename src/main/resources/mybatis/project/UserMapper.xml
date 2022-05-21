@@ -12,14 +12,14 @@
             <if test="address != null and address != ''">
                 address = #{address},
             </if>
-            <if test="countyId != 0">
-                county_id = #{countyId},
+            <if test="county != null and county.id > 0">
+                county_id = #{county.id},
+            </if>
+            <if test="duty != null and duty.id > 0">
+                duty_id = #{duty.id},
             </if>
             <if test="wxCode != null and wxCode != ''">
                 wx_code = #{wxCode},
-            </if>
-            <if test="dutyId != 0">
-                duty_id = #{dutyId},
             </if>
             <if test="updateTime != null">
                 update_time = #{updateTime},
@@ -28,7 +28,9 @@
         where id = #{id}
     </update>
     <update id="disabled">
-        update ls_user set available = '0' where id = #{id}
+        update ls_user
+        set available = '0'
+        where id = #{id}
     </update>
     <select id="list" resultType="com.han.ls.project.domain.User">
         select *
@@ -39,9 +41,57 @@
         from ls_user
         where id = #{id}
     </select>
-    <select id="selectByOpenId" resultType="com.han.ls.project.domain.User">
-        select *
+
+    <resultMap id="user" type="com.han.ls.project.domain.User">
+        <id column="id" property="id"/>
+        <result column="user_name" property="userName"/>
+        <result column="password" property="password"/>
+        <result column="phone" property="phone"/>
+        <result column="wx_code" property="wxCode"/>
+        <result column="open_id" property="openId"/>
+        <result column="union_id" property="unionId"/>
+        <result column="avatarUrl" property="avatarUrl"/>
+        <result column="remark" property="remark"/>
+        <result column="address" property="address"/>
+        <result column="businessType" property="businessType"/>
+        <result column="createTime" property="createTime"/>
+        <result column="updateTime" property="updateTime"/>
+        <result column="available" property="available"/>
+        <association property="county" javaType="com.han.ls.project.domain.County">
+            <id column="county_id" property="id"/>
+            <result column="code" property="code"/>
+            <result column="county_name" property="name"/>
+            <result column="province_id" property="provinceId"/>
+            <result column="province_name" property="provinceName"/>
+            <result column="province_code" property="provinceCode"/>
+            <result column="city_id" property="cityId"/>
+            <result column="city_code" property="cityCode"/>
+            <result column="city_name" property="cityName"/>
+        </association>
+        <association property="duty" javaType="com.han.ls.project.domain.Duty">
+            <id column="duty_id" property="id"/>
+            <result column="duty_name" property="name"/>
+            <result column="description" property="description"/>
+        </association>
+    </resultMap>
+
+    <select id="selectByOpenId" resultMap="user">
+        select ls_user.*,
+               ls_duty.id     as duty_id,
+               ls_duty.name   as duty_name,
+               ls_duty.description,
+               ls_county.id   as county_id,
+               ls_county.code,
+               ls_county.name as county_name,
+               ls_county.province_id,
+               ls_county.province_code,
+               ls_county.province_name,
+               ls_county.city_id,
+               ls_county.city_code,
+               ls_county.city_name
         from ls_user
+                 left join ls_duty on ls_user.duty_id = ls_duty.id
+                 left join ls_county on ls_user.county_id = ls_county.id
         where open_id = #{openId}
     </select>
 

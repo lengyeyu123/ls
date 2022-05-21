@@ -19,7 +19,7 @@ public class R<T> implements Serializable {
     /**
      * 前端通知消息
      */
-    private String msg;
+    private String message;
 
     /**
      * 默认信息，exception中携带的消息
@@ -34,14 +34,14 @@ public class R<T> implements Serializable {
     public static <T> R<T> success() {
         R<T> r = new R<>();
         r.setCode(ResultStatus.OK.getCode());
-        r.setMsg(ResultStatus.OK.getMsg());
+        r.setMessage(ResultStatus.OK.getMessage());
         return r;
     }
 
     public static <T> R<T> success(T data) {
         R<T> r = new R<>();
         r.setCode(ResultStatus.OK.getCode());
-        r.setMsg(ResultStatus.OK.getMsg());
+        r.setMessage(ResultStatus.OK.getMessage());
         r.setData(data);
         return r;
     }
@@ -56,14 +56,14 @@ public class R<T> implements Serializable {
     public static <T> R<T> success(String msg) {
         R<T> r = new R<>();
         r.setCode(ResultStatus.OK.getCode());
-        r.setMsg(msg);
+        r.setMessage(msg);
         return r;
     }
 
     public static <T> R<T> success(String msg, T data) {
         R<T> r = new R<>();
         r.setCode(ResultStatus.OK.getCode());
-        r.setMsg(msg);
+        r.setMessage(msg);
         r.setData(data);
         return r;
     }
@@ -73,14 +73,14 @@ public class R<T> implements Serializable {
         if (Objects.isNull(e.getResultStatus())) {
             if (StringUtils.isNotBlank(e.getMsg())) {
                 r.setCode(ResultStatus.ERROR.getCode());
-                r.setMsg(e.getMsg());
+                r.setMessage(e.getMsg());
             } else {
                 r.setCode(ResultStatus.ERROR.getCode());
-                r.setMsg(ResultStatus.ERROR.getMsg());
+                r.setMessage(ResultStatus.ERROR.getMessage());
             }
         } else {
             r.setCode(e.getResultStatus().getCode());
-            r.setMsg(e.getResultStatus().getMsg());
+            r.setMessage(e.getResultStatus().getMessage());
         }
         return r;
     }
@@ -88,7 +88,7 @@ public class R<T> implements Serializable {
     public static <T> R<T> error(Exception e) {
         R<T> r = new R<>();
         r.setCode(ResultStatus.ERROR.getCode());
-        r.setMsg(ResultStatus.ERROR.getMsg());
+        r.setMessage(ResultStatus.ERROR.getMessage());
         r.setDefaultMsg(e.getMessage());
         return r;
     }
@@ -96,7 +96,7 @@ public class R<T> implements Serializable {
     public static <T> R<T> error(ResultStatus resultStatus) {
         R<T> r = new R<>();
         r.setCode(resultStatus.getCode());
-        r.setMsg(resultStatus.getMsg());
+        r.setMessage(resultStatus.getMessage());
         return r;
     }
 

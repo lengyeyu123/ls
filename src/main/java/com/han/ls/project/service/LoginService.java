@@ -39,6 +39,9 @@ public class LoginService {
     private TokenService tokenService;
 
     @Autowired
+    private AddressService addressService;
+
+    @Autowired
     private WxMaProperties wxMaProperties;
 
     @Autowired
@@ -89,6 +92,7 @@ public class LoginService {
         // 拿到用户信息 然后生成jwt返回给前端
         // 这个其实就是UserDetails 也就是LoginUser
         LoginUser loginUser = (LoginUser) authenticate.getPrincipal();
+
         return tokenService.createLoginUser(loginUser);
     }
 
