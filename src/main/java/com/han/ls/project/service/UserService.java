@@ -69,7 +69,7 @@ public class UserService {
         User loginUser = LsUtils.getLoginUser();
         if (StringUtils.isBlank(reqVo.getAddress()) && StringUtils.isBlank(reqVo.getPhone())
                 && reqVo.getCountyId() == 0 && StringUtils.isBlank(reqVo.getWxCode())
-                && reqVo.getDutyId() == 0
+                && reqVo.getDutyId() == 0 && StringUtils.isBlank(reqVo.getUserName())
         ) {
             return loginUser;
         }
@@ -95,6 +95,7 @@ public class UserService {
         }
         loginUser.setAddress(reqVo.getAddress())
                 .setWxCode(reqVo.getWxCode())
+                .setUserName(reqVo.getUserName())
                 .setUpdateTime(new Date());
         userMapper.updateUserInfo(loginUser);
         return loginUser;

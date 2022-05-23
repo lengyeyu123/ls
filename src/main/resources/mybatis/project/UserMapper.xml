@@ -21,6 +21,9 @@
             <if test="wxCode != null and wxCode != ''">
                 wx_code = #{wxCode},
             </if>
+            <if test="userName != null and userName != ''">
+                user_name = #{userName},
+            </if>
             <if test="updateTime != null">
                 update_time = #{updateTime},
             </if>
