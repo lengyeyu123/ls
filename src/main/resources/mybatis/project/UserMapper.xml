@@ -24,6 +24,9 @@
             <if test="userName != null and userName != ''">
                 user_name = #{userName},
             </if>
+            <if test="avatarUrl != null and avatarUrl != ''">
+                avatar_url = #{avatarUrl},
+            </if>
             <if test="updateTime != null">
                 update_time = #{updateTime},
             </if>

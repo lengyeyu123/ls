@@ -70,6 +70,7 @@ public class UserService {
         if (StringUtils.isBlank(reqVo.getAddress()) && StringUtils.isBlank(reqVo.getPhone())
                 && reqVo.getCountyId() == 0 && StringUtils.isBlank(reqVo.getWxCode())
                 && reqVo.getDutyId() == 0 && StringUtils.isBlank(reqVo.getUserName())
+                && StringUtils.isBlank(reqVo.getAvatarUrl())
         ) {
             return loginUser;
         }
@@ -93,9 +94,11 @@ public class UserService {
             Duty duty = dutyService.selectById(reqVo.getDutyId());
             loginUser.setDuty(duty);
         }
+
         loginUser.setAddress(reqVo.getAddress())
                 .setWxCode(reqVo.getWxCode())
                 .setUserName(reqVo.getUserName())
+                .setAvatarUrl(reqVo.getAvatarUrl())
                 .setUpdateTime(new Date());
         userMapper.updateUserInfo(loginUser);
         return loginUser;
