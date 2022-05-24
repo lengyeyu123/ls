@@ -3,6 +3,7 @@ package com.han.ls.project.controller;
 import cn.binarywang.wx.miniapp.api.WxMaService;
 import com.han.ls.common.constant.LsConstants;
 import com.han.ls.common.enums.ResultStatus;
+import com.han.ls.common.enums.UploadFileEnum;
 import com.han.ls.common.exception.ServiceException;
 import com.han.ls.common.utils.DateUtils;
 import com.han.ls.framework.config.LsConfig;
@@ -38,15 +39,13 @@ public class FileUploadController {
     private WxMaProperties wxMaProperties;
 
     /**
+     * 文件上传，支持多类型 多文件上传
+     * 上传文件类型已经在uploadFileEnum中确定，类型错误不允许上传
      * fullFilePath = FILE_UPLOAD_PATH + relativePath + newFileName;
-     *
-     * @param files
-     * @param fileType
-     * @return
      */
     @SneakyThrows
-    @PostMapping("/image/batch")
-    public R<List<String>> handleImagesUpload(@RequestParam(required = false, name = "files") MultipartFile[] files, @RequestParam(name = "fileType") String fileType) {
+    @PostMapping("/batch")
+    public R<List<String>> handleImagesUpload(@RequestParam(required = false, name = "files") MultipartFile[] files, @RequestParam(name = "fileType") UploadFileEnum uploadFileEnum) {
         if (files.length == 0) {
             throw new ServiceException("上传文件为空，请选择文件");
         }
@@ -55,8 +54,8 @@ public class FileUploadController {
             String contentType = file.getContentType();
             log.info("上传文件类型为 {}", contentType);
             String s = StringUtils.substringBefore(contentType, "/");
-            if (!s.equals("image")) {
-                throw new ServiceException("文件类型错误，请上传图片");
+            if (!s.equals(uploadFileEnum.getFileType())) {
+                throw new ServiceException("文件类型错误，请上传" + uploadFileEnum.getFileType());
             }
         }
 
@@ -80,7 +79,7 @@ public class FileUploadController {
             // 完整文件名 aaa.png
             String newFileName = fileBaseName + "-" + i + suffixName;
             // 相对路径
-            String relativePath = fileType + "/" + DateUtils.dateTimeNow(DateUtils.YYYYMMDD) + "/" + loginUser.getOpenId() + "/";
+            String relativePath = uploadFileEnum.getRelativePath() + DateUtils.dateTimeNow(DateUtils.YYYYMMDD) + "/" + loginUser.getOpenId() + "/";
             // 文件夹是否存在
             File fileDir = new File(uploadFilePathPrefix + relativePath);
             if (!fileDir.exists()) {

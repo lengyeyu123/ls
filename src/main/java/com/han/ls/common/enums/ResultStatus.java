@@ -9,7 +9,7 @@ public enum ResultStatus {
 
     ERROR(50000, "服务器内部错误"),
 
-    INVALID_TOKEN(-1, "登录过期，请重新登录"),
+    INVALID_TOKEN(-1, "未登录，请登录后使用"),
 
     USER_STATUS_DISABLED(50101, "已被禁用"),
 
