@@ -11,7 +11,7 @@
  Target Server Version : 50540
  File Encoding         : 65001
 
- Date: 11/05/2022 15:50:55
+ Date: 25/05/2022 17:54:15
 */
 
 SET NAMES utf8mb4;
@@ -3257,7 +3257,7 @@ CREATE TABLE `ls_case`  (
   `address` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `desc_imgs` varchar(800) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of ls_case
@@ -3266,6 +3266,10 @@ INSERT INTO `ls_case` VALUES (1, 1, '描述', NULL, '案例的详细地址', '[\
 INSERT INTO `ls_case` VALUES (2, 1, '描述2323', NULL, '案例的详细地址', '[\"aaa\",\"bbb\"]');
 INSERT INTO `ls_case` VALUES (3, 1, '描述2222323', 0, '案例的详细地址', '[\"aa4a\",\"bb4b\"]');
 INSERT INTO `ls_case` VALUES (4, 1, '描述222ds2323', 1, '案例的详细地址', '[\"aa4a\",\"bb4b\"]');
+INSERT INTO `ls_case` VALUES (5, 8, '他妈的的', 1, '案例的详细地址', '[\"aa4a\",\"bb4b\"]');
+INSERT INTO `ls_case` VALUES (6, 8, 'fuck', 1, '案例的详细地址', '[\"aa4a\",\"bb4b\"]');
+INSERT INTO `ls_case` VALUES (7, 8, '马化腾傻逼', 1, '案例的详细地址', '[\"aa4a\",\"bb4b\"]');
+INSERT INTO `ls_case` VALUES (8, 8, '马化腾傻逼', 1, '案例的详细地址', '[\"aa4a\",\"bb4b\"]');
 
 -- ----------------------------
 -- Table structure for ls_city
@@ -6453,12 +6457,14 @@ CREATE TABLE `ls_duty`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `order_no` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of ls_duty
 -- ----------------------------
+INSERT INTO `ls_duty` VALUES (1, '水电', '水电修改', 1);
 
 -- ----------------------------
 -- Table structure for ls_duty_addr_price
@@ -6559,12 +6565,14 @@ CREATE TABLE `ls_task`  (
   `create_time` datetime NULL DEFAULT NULL,
   `update_time` datetime NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of ls_task
 -- ----------------------------
 INSERT INTO `ls_task` VALUES (1, '描述', '[\"aaa\",\"bbb\"]', 1, '2022-05-10 11:11:41', '2020-02-29 12:23:10', NULL, NULL, NULL, NULL, NULL, '2022-05-10 11:11:41', NULL);
+INSERT INTO `ls_task` VALUES (2, '他妈的', '[\"aaa\",\"bbb\"]', 8, '2022-05-18 11:48:53', '2020-02-29 12:23:10', NULL, NULL, NULL, NULL, NULL, '2022-05-18 11:48:53', NULL);
+INSERT INTO `ls_task` VALUES (3, '他妈的', '[\"aaa\",\"bbb\"]', 8, '2022-05-18 11:49:02', '2020-02-29 12:23:10', NULL, NULL, NULL, NULL, NULL, '2022-05-18 11:49:02', NULL);
 
 -- ----------------------------
 -- Table structure for ls_user
@@ -6580,8 +6588,6 @@ CREATE TABLE `ls_user`  (
   `union_id` char(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `avatar_url` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `remark` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `province_id` int(11) NULL DEFAULT NULL,
-  `city_id` int(11) NULL DEFAULT NULL,
   `county_id` int(11) NULL DEFAULT NULL,
   `address` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `business_type` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '\'0\':ls',
@@ -6590,29 +6596,29 @@ CREATE TABLE `ls_user`  (
   `update_time` datetime NULL DEFAULT NULL,
   `available` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '1' COMMENT '\'0\'禁用 \'1\'可用',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of ls_user
 -- ----------------------------
-INSERT INTO `ls_user` VALUES (1, '张三', NULL, '18333603120', NULL, '1', NULL, NULL, NULL, NULL, NULL, 199, '永安', NULL, NULL, '2022-05-07 23:02:54', NULL, '1');
-INSERT INTO `ls_user` VALUES (2, '李四', NULL, NULL, NULL, '2', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-05-07 23:02:54', NULL, '1');
+INSERT INTO `ls_user` VALUES (1, '张三', NULL, '18333603120', NULL, '1', NULL, NULL, NULL, 199, '永安', NULL, NULL, '2022-05-07 23:02:54', NULL, '1');
+INSERT INTO `ls_user` VALUES (2, '李四', NULL, NULL, NULL, '2', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-05-07 23:02:54', NULL, '1');
+INSERT INTO `ls_user` VALUES (8, '平凡之', NULL, '17801096179', '2244', 'oMvZf4-AgoG6u8DINGFcRZlMUAGk', NULL, '/lsImgUpload/user/avatar/image/20220524/oMvZf4-AgoG6u8DINGFcRZlMUAGk/8b325f32344f4349931b4aed3c5502c6-0.png', NULL, 189, '详细地址11', NULL, 1, '2022-05-18 11:42:37', '2022-05-24 17:11:14', '1');
 
 -- ----------------------------
 -- Table structure for ls_user_case
 -- ----------------------------
 DROP TABLE IF EXISTS `ls_user_case`;
 CREATE TABLE `ls_user_case`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `user_id` int(11) NULL DEFAULT NULL,
   `case_id` int(11) NULL DEFAULT NULL,
   `create_time` datetime NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户案例收藏表' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of ls_user_case
 -- ----------------------------
-INSERT INTO `ls_user_case` VALUES (2, 1, 1, '2022-05-11 15:16:31');
 
 SET FOREIGN_KEY_CHECKS = 1;
