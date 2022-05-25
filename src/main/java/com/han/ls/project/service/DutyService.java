@@ -1,7 +1,11 @@
 package com.han.ls.project.service;
 
+import com.han.ls.common.utils.JsonUtils;
 import com.han.ls.project.domain.Duty;
+import com.han.ls.project.domain.DutyStandard;
 import com.han.ls.project.mapper.DutyMapper;
+import com.han.ls.project.vo.req.StandardAddReqVo;
+import com.han.ls.project.vo.req.StandardUpdateReqVo;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -39,5 +43,33 @@ public class DutyService {
 
     public Duty selectById(int dutyId) {
         return dutyMapper.selectById(dutyId);
+    }
+
+    public List<DutyStandard> standardAll() {
+        List<DutyStandard> list = dutyMapper.standardAll();
+        list.forEach(o -> {
+            o.setDescImgArr(JsonUtils.josn2StrList(o.getDescImgs()));
+        });
+        return list;
+    }
+
+    public void standardAdd(StandardAddReqVo reqVo) {
+        DutyStandard dutyStandard = new DutyStandard();
+        if (!reqVo.getDescImgArr().isEmpty()) {
+            String json = JsonUtils.toJson(reqVo.getDescImgArr());
+            dutyStandard.setDescImgs(json);
+        }
+        dutyStandard.setDescription(reqVo.getDescription());
+        dutyStandard.setDuty(new Duty().setId(reqVo.getDuty_id()));
+        dutyMapper.standardAdd(dutyStandard);
+    }
+
+    public void standardUpdate(StandardUpdateReqVo reqVo) {
+        if (reqVo.getDutyId() != 0 && StringUtils.isNotBlank(reqVo.getDescription()) && !reqVo.getDescImgArr().isEmpty()) {
+            if (!reqVo.getDescImgArr().isEmpty()) {
+                reqVo.setDescImgs(JsonUtils.toJson(reqVo.getDescImgArr()));
+            }
+            dutyMapper.standardUpdate(reqVo);
+        }
     }
 }

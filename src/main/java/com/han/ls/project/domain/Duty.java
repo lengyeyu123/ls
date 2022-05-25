@@ -3,6 +3,7 @@ package com.han.ls.project.domain;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 
 /**
@@ -18,5 +19,11 @@ public class Duty {
     private String name;
 
     private String description;
+
+    /**
+     * 排序字段
+     */
+    @Min(1)
+    private int orderNo;
 
 }

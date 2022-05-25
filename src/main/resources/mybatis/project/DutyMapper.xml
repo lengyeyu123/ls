@@ -5,8 +5,12 @@
 <mapper namespace="com.han.ls.project.mapper.DutyMapper">
 
     <insert id="add" parameterType="com.han.ls.project.domain.Duty">
-        insert into ls_duty (name, description)
-        values (#{name}, #{description})
+        insert into ls_duty (name, description, order_no)
+        values (#{name}, #{description}, #{orderNo})
+    </insert>
+    <insert id="standardAdd" parameterType="com.han.ls.project.domain.DutyStandard">
+        insert into ls_duty_standard (description, desc_imgs, duty_id)
+        values (#{description}, #{descImgs}, #{duty.id})
     </insert>
     <update id="update">
         update ls_duty
@@ -17,6 +21,24 @@
             <if test="description != null and description != ''">
                 description = #{description},
             </if>
+            <if test="orderNo != 0">
+                orderNo = #{orderNo}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <update id="standardUpdate" parameterType="com.han.ls.project.vo.req.StandardUpdateReqVo">
+        update ls_duty_standard
+        <set>
+            <if test="dutyId != 0">
+                duty_id = #{dutyId},
+            </if>
+            <if test="description != null and description != ''">
+                description = #{description},
+            </if>
+            <if test="descImgs != null and descImgs != ''">
+                descImgs = #{descImgs},
+            </if>
         </set>
         where id = #{id}
     </update>
@@ -25,10 +47,34 @@
     <select id="all" resultType="com.han.ls.project.domain.Duty">
         select *
         from ls_duty
+        order by order_no
     </select>
     <select id="selectById" resultType="com.han.ls.project.domain.Duty">
         select *
         from ls_duty
         where id = #{dutyId}
+    </select>
+
+    <resultMap id="standardMap" type="com.han.ls.project.domain.DutyStandard">
+        <id column="id" property="id"/>
+        <result column="description" property="description"/>
+        <result column="desc_imgs" property="descImgs"/>
+        <association property="duty" javaType="com.han.ls.project.domain.Duty">
+            <id column="duty_id" property="id"/>
+            <result column="name" property="name"/>
+            <result column="duty_description" property="description"/>
+            <result column="order_no" property="orderNo"/>
+        </association>
+    </resultMap>
+
+    <select id="standardAll" resultMap="standardMap">
+        select ls_duty_standard.*,
+               ls_duty.id          as duty_id,
+               ls_duty.name,
+               ls_duty.description as duty_description,
+               ls_duty.order_no
+        from ls_duty_standard
+                 left join ls_duty on ls_duty_standard.duty_id = ls_duty.id
+        order by ls_duty.order_no
     </select>
 </mapper>

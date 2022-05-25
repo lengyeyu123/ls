@@ -11,19 +11,34 @@ import java.util.List;
 public class Task {
 
     private int id;
+
     private String description;
+
     private String descImgs;
+
     // 返回前端页面拼接参数
     private List<String> imgArr;
+
     private int issuerId;
+
     private Date publishTime;
+
     private Date deadline;
+
     private Date finishTime;
+
     private int finishUserId;
+
     private String finishImgs;
+
+    private List<String> finishImgArr;
+
     private int caseId;
+
     private String satisfaction;
+
     private Date createTime;
+
     private Date updateTime;
 
 }

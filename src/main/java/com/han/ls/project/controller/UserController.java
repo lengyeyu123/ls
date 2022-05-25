@@ -2,7 +2,6 @@ package com.han.ls.project.controller;
 
 import com.han.ls.framework.utils.LsUtils;
 import com.han.ls.framework.web.domain.R;
-import com.han.ls.framework.web.service.TokenService;
 import com.han.ls.project.domain.User;
 import com.han.ls.project.service.UserService;
 import com.han.ls.project.vo.req.UpdateUserInfoReqVo;
@@ -18,11 +17,9 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private TokenService tokenService;
-
     /**
      * 更新用户的基本信息
+     *
      * @param reqVo
      * @return
      */
@@ -52,7 +49,6 @@ public class UserController {
         userService.disabled(userId);
         return R.success();
     }
-
 
 
 }
