@@ -10,6 +10,8 @@ import java.util.List;
 @Data
 public class AddTaskReqVo {
 
+    private int id;
+
     /**
      * 描述
      */
@@ -20,7 +22,7 @@ public class AddTaskReqVo {
      * 描述图片
      */
     @NotNull
-    private List<String> descImgArr;
+    private List<String> imgArr;
 
     /**
      * 截止时间

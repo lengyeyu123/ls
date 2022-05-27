@@ -25,8 +25,7 @@ public class TaskController {
 
     @PostMapping("/add")
     public R<?> add(@RequestBody @Validated AddTaskReqVo reqVo) {
-        taskService.add(reqVo);
-        return R.success();
+        return R.success(taskService.add(reqVo));
     }
 
     @PostMapping("/list")

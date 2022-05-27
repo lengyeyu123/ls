@@ -1,6 +1,5 @@
 package com.han.ls.project.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.pagehelper.PageHelper;
 import com.han.ls.common.utils.JsonUtils;
 import com.han.ls.framework.utils.LsUtils;
@@ -32,20 +31,30 @@ public class TaskService {
     private CaseMapper caseMapper;
 
     @SneakyThrows
-    public void add(AddTaskReqVo reqVo) {
+    public int add(AddTaskReqVo reqVo) {
         User loginUser = LsUtils.getLoginUser();
-        List<String> descImgArr = reqVo.getDescImgArr();
-        ObjectMapper objectMapper = new ObjectMapper();
-        String descImgs = objectMapper.writeValueAsString(descImgArr);
         Date now = new Date();
 
-        taskMapper.add(new Task().setDescription(reqVo.getDescription())
-                .setDescImgs(descImgs)
-                .setCreateTime(now)
-                .setDeadline(reqVo.getDeadline())
-                .setIssuerId(loginUser.getId())
-                .setPublishTime(now)
-        );
+        if (reqVo.getId() != 0) {
+            Task updateTask = new Task();
+            updateTask.setId(reqVo.getId());
+            updateTask.setDescription(reqVo.getDescription());
+            updateTask.setDescImgs(JsonUtils.toJson(reqVo.getImgArr()));
+            updateTask.setDeadline(reqVo.getDeadline());
+            updateTask.setUpdateTime(now);
+            taskMapper.update(updateTask);
+            return updateTask.getId();
+        } else {
+            Task task = new Task();
+            taskMapper.add(task.setDescription(reqVo.getDescription())
+                    .setDescImgs(JsonUtils.toJson(reqVo.getImgArr()))
+                    .setCreateTime(now)
+                    .setDeadline(reqVo.getDeadline())
+                    .setIssuerId(loginUser.getId())
+                    .setPublishTime(now)
+            );
+            return task.getId();
+        }
 
     }
 

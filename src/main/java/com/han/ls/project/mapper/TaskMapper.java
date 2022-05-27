@@ -14,4 +14,6 @@ public interface TaskMapper {
     Task selectById(int taskId);
 
     void finish(Task task);
+
+    void update(Task updateTask);
 }

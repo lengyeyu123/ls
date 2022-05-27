@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.han.ls.project.mapper.TaskMapper">
 
-    <insert id="add" parameterType="com.han.ls.project.domain.Task">
+    <insert id="add" parameterType="com.han.ls.project.domain.Task" useGeneratedKeys="true" keyProperty="id">
         insert into ls_task (description, desc_imgs, issuer_id, publish_time, deadline, create_time)
         values (#{description}, #{descImgs}, #{issuerId}, #{publishTime}, #{deadline}, #{createTime})
     </insert>
@@ -15,6 +15,14 @@
             finish_imgs    = #{finishImgs},
             case_id        = #{caseId},
             update_time    = #{updateTime}
+        where id = #{id}
+    </update>
+    <update id="update" parameterType="com.han.ls.project.domain.Task">
+        update ls_task
+        set description = #{description},
+            desc_imgs   = #{descImgs},
+            deadline    = #{deadline},
+            update_time = #{updateTime}
         where id = #{id}
     </update>
 
@@ -38,6 +46,7 @@
                 and publish_time <![CDATA[ <= ]]> #{publishTimeEnd}
             </if>
         </where>
+        order by create_time desc
     </select>
     <select id="selectById" resultType="com.han.ls.project.domain.Task">
         select *
