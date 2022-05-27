@@ -10,10 +10,7 @@ import com.han.ls.project.vo.req.TaskListReqVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
@@ -36,6 +33,12 @@ public class TaskController {
     @PostMapping("/finish")
     public R<?> finish(@RequestBody @Validated FinishTaskReqVo reqVo) {
         taskService.finish(reqVo);
+        return R.success();
+    }
+
+    @GetMapping("/disable")
+    public R<?> disable(int id) {
+        taskService.disable(id);
         return R.success();
     }
 

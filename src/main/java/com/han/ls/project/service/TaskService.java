@@ -96,4 +96,8 @@ public class TaskService {
                 .setUpdateTime(now);
         taskMapper.finish(task);
     }
+
+    public void disable(int id) {
+        taskMapper.disable(id);
+    }
 }

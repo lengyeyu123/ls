@@ -25,6 +25,11 @@
             update_time = #{updateTime}
         where id = #{id}
     </update>
+    <update id="disable">
+        update ls_task
+        set available = '0'
+        where id = #{id}
+    </update>
 
     <select id="list" parameterType="com.han.ls.project.vo.req.TaskListReqVo"
             resultType="com.han.ls.project.domain.Task">
@@ -45,6 +50,7 @@
             <if test="publishTimeEnd != null">
                 and publish_time <![CDATA[ <= ]]> #{publishTimeEnd}
             </if>
+            and available = '1'
         </where>
         order by create_time desc
     </select>

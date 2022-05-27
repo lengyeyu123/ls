@@ -16,4 +16,6 @@ public interface TaskMapper {
     void finish(Task task);
 
     void update(Task updateTask);
+
+    void disable(int id);
 }

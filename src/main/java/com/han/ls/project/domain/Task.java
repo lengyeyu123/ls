@@ -41,4 +41,9 @@ public class Task {
 
     private Date updateTime;
 
+    /**
+     * 是否可见 1:可见 0:不可见
+     */
+    private char available;
+
 }
