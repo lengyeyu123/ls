@@ -71,6 +71,9 @@ public class CaseService {
     }
 
     public List<Case> list(CaseListReqVo reqVo) {
+        if (reqVo.isCollectSearch()) {
+            reqVo.setUserId(LsUtils.getLoginUser().getId());
+        }
         PageHelper.startPage(reqVo);
         List<Case> list = caseMapper.list(reqVo);
         for (Case aCase : list) {
@@ -89,13 +92,14 @@ public class CaseService {
         return list;
     }
 
-    @GetMapping("/collect")
-    public void collectCase(int caseId) {
-        caseMapper.collectCase(new UserCase().setCaseId(caseId).setUserId(LsUtils.getLoginUser().getId()).setCreateTime(new Date()));
-    }
-
-    @GetMapping("/unCollect")
-    public void unCollectCase(int caseId) {
-        caseMapper.unCollectCase(LsUtils.getLoginUser().getId(), caseId);
+    @GetMapping("/collectOrUndo")
+    public void collectOrUndo(int caseId) {
+        int userId = LsUtils.getLoginUser().getId();
+        int count = caseMapper.countByUserIdAndCaseId(userId, caseId);
+        if (count == 0) {
+            caseMapper.collectCase(new UserCase().setCaseId(caseId).setUserId(LsUtils.getLoginUser().getId()).setCreateTime(new Date()));
+        } else {
+            caseMapper.unCollectCase(userId, caseId);
+        }
     }
 }

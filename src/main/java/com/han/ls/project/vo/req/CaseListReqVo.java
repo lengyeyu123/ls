@@ -23,5 +23,8 @@ public class CaseListReqVo {
 
     private String searchValue;
 
+    // 默认非我的收藏
+    private boolean collectSearch = false;
 
+    private Integer userId;
 }

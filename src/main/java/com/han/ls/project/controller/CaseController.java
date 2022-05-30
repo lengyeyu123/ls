@@ -29,15 +29,9 @@ public class CaseController {
         return R.success(new PageInfo<>(caseService.list(reqVo)));
     }
 
-    @GetMapping("/collect")
-    public R<?> collect(int caseId) {
-        caseService.collectCase(caseId);
-        return R.success();
-    }
-
-    @GetMapping("/unCollect")
-    public R<?> unCollect(int caseId) {
-        caseService.unCollectCase(caseId);
+    @GetMapping("/collectOrUndo")
+    public R<?> collectOrUndo(int caseId) {
+        caseService.collectOrUndo(caseId);
         return R.success();
     }
 

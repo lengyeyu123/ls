@@ -23,6 +23,9 @@
             resultType="com.han.ls.project.domain.Case">
         select ls_case.*
         from ls_case, ls_user
+        <if test="collectSearch == true">
+            ,ls_user_case
+        </if>
         <where>
             ls_case.user_id = ls_user.id
             <!-- <if test="userName != null and userName != ''"> -->
@@ -34,7 +37,10 @@
             <if test="searchValue != null and searchValue != ''">
                 userName like CONCAT ('%', #{userName}, '%') or description like CONCAT ('%',#{description},'%')
             </if>
-            and available = '1'
+            <if test="collectSearch == true">
+                and ls_user_case.case_id = ls_case.id and ls_user_case.user_id = #{userId}
+            </if>
+            and ls_case.available = '1'
         </where>
     </select>
     <select id="selectUserCase" resultType="com.han.ls.project.domain.UserCase">
@@ -47,5 +53,11 @@
                 case_id = #{caseId}
             </foreach>
         </if>
+    </select>
+    <select id="countByUserIdAndCaseId" resultType="java.lang.Integer">
+        select count(id)
+        from ls_user_case
+        where user_id = #{userId}
+          and case_id = #{caseId}
     </select>
 </mapper>
