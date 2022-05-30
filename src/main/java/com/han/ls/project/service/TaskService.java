@@ -60,7 +60,7 @@ public class TaskService {
 
     @SneakyThrows
     public List<Task> list(TaskListReqVo reqVo) {
-        PageHelper.startPage(reqVo.getPage(), reqVo.getPageSize());
+        PageHelper.startPage(reqVo);
         List<Task> list = taskMapper.list(reqVo);
         for (Task task : list) {
             String descImgs = task.getDescImgs();

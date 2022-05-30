@@ -17,7 +17,7 @@
         delete
         from ls_user_case
         where user_id = #{userId}
-        and case_id = #{caseId}
+          and case_id = #{caseId}
     </delete>
     <select id="list" parameterType="com.han.ls.project.vo.req.CaseListReqVo"
             resultType="com.han.ls.project.domain.Case">
@@ -25,12 +25,16 @@
         from ls_case, ls_user
         <where>
             ls_case.user_id = ls_user.id
-            <if test="userName != null and userName != ''">
-                and userName like CONCAT ('%', #{userName}, '%')
+            <!-- <if test="userName != null and userName != ''"> -->
+            <!--     and userName like CONCAT ('%', #{userName}, '%') -->
+            <!-- </if> -->
+            <!-- <if test="description != null and description != ''"> -->
+            <!--     and description like CONCAT ('%',#{description},'%') -->
+            <!-- </if> -->
+            <if test="searchValue != null and searchValue != ''">
+                userName like CONCAT ('%', #{userName}, '%') or description like CONCAT ('%',#{description},'%')
             </if>
-            <if test="description != null and description != ''">
-                and description like CONCAT ('%',#{description},'%')
-            </if>
+            and available = '1'
         </where>
     </select>
     <select id="selectUserCase" resultType="com.han.ls.project.domain.UserCase">

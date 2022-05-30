@@ -11,7 +11,7 @@ public class CaseListReqVo {
     // 分页
     @NotNull
     @Min(1)
-    private Integer page;
+    private Integer pageNum;
 
     @NotNull
     @Min(1)
@@ -20,6 +20,8 @@ public class CaseListReqVo {
     private String description;
 
     private String userName;
+
+    private String searchValue;
 
 
 }

@@ -19,10 +19,12 @@ public class TaskListReqVo {
 
     private Date publishTimeEnd;
 
+    private String searchValue;
+
     // 分页
     @NotNull
     @Min(1)
-    private Integer page;
+    private Integer pageNum;
 
     @NotNull
     @Min(1)

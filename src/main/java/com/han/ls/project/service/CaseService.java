@@ -62,17 +62,16 @@ public class CaseService {
             throw new ServiceException(ResultStatus.VIOLATION_CONTENT);
         }
 
-        Case aCase = new Case()
+        caseMapper.add(new Case()
                 .setUserId(loginUser.getId())
                 .setDescription(reqVo.getDescription())
                 .setCountyId(reqVo.getCountyId())
                 .setAddress(reqVo.getAddress())
-                .setDescImgs(JsonUtils.toJson(reqVo.getDescImgArr()));
-        caseMapper.add(aCase);
+                .setDescImgs(JsonUtils.toJson(reqVo.getDescImgArr())));
     }
 
     public List<Case> list(CaseListReqVo reqVo) {
-        PageHelper.startPage(reqVo.getPage(), reqVo.getPageSize());
+        PageHelper.startPage(reqVo);
         List<Case> list = caseMapper.list(reqVo);
         for (Case aCase : list) {
             aCase.setImgArr(JsonUtils.josn2StrList(aCase.getDescImgs()));
@@ -92,13 +91,11 @@ public class CaseService {
 
     @GetMapping("/collect")
     public void collectCase(int caseId) {
-        UserCase userCase = new UserCase().setCaseId(caseId).setUserId(LsUtils.getLoginUser().getId()).setCreateTime(new Date());
-        caseMapper.collectCase(userCase);
+        caseMapper.collectCase(new UserCase().setCaseId(caseId).setUserId(LsUtils.getLoginUser().getId()).setCreateTime(new Date()));
     }
 
     @GetMapping("/unCollect")
     public void unCollectCase(int caseId) {
-        int userId = LsUtils.getLoginUser().getId();
-        caseMapper.unCollectCase(userId, caseId);
+        caseMapper.unCollectCase(LsUtils.getLoginUser().getId(), caseId);
     }
 }
