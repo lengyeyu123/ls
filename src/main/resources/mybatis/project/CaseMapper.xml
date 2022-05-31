@@ -35,7 +35,7 @@
             <!--     and description like CONCAT ('%',#{description},'%') -->
             <!-- </if> -->
             <if test="searchValue != null and searchValue != ''">
-                userName like CONCAT ('%', #{userName}, '%') or description like CONCAT ('%',#{description},'%')
+                and (ls_user.user_name like CONCAT ('%', #{searchValue}, '%') or ls_case.description like CONCAT ('%',#{searchValue},'%'))
             </if>
             <if test="collectSearch == true">
                 and ls_user_case.case_id = ls_case.id and ls_user_case.user_id = #{userId}

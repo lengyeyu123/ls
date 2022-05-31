@@ -30,8 +30,8 @@ public class CaseController {
     }
 
     @GetMapping("/collectOrUndo")
-    public R<?> collectOrUndo(int caseId) {
-        caseService.collectOrUndo(caseId);
+    public R<?> collectOrUndo(int id) {
+        caseService.collectOrUndo(id);
         return R.success();
     }
 

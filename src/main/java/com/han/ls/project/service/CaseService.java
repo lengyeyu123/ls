@@ -93,13 +93,13 @@ public class CaseService {
     }
 
     @GetMapping("/collectOrUndo")
-    public void collectOrUndo(int caseId) {
+    public void collectOrUndo(int id) {
         int userId = LsUtils.getLoginUser().getId();
-        int count = caseMapper.countByUserIdAndCaseId(userId, caseId);
+        int count = caseMapper.countByUserIdAndCaseId(userId, id);
         if (count == 0) {
-            caseMapper.collectCase(new UserCase().setCaseId(caseId).setUserId(LsUtils.getLoginUser().getId()).setCreateTime(new Date()));
+            caseMapper.collectCase(new UserCase().setCaseId(id).setUserId(LsUtils.getLoginUser().getId()).setCreateTime(new Date()));
         } else {
-            caseMapper.unCollectCase(userId, caseId);
+            caseMapper.unCollectCase(userId, id);
         }
     }
 }
