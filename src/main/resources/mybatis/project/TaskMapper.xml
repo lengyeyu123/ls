@@ -35,23 +35,11 @@
             resultType="com.han.ls.project.domain.Task">
         select * from ls_task
         <where>
-            <!-- <if test="description != null and description != ''"> -->
-            <!--     and description like CONCAT ('%',#{description},'%') -->
-            <!-- </if> -->
-            <!-- <if test="dutyId != 0"> -->
-            <!--     and duty_id = #{dutyId} -->
-            <!-- </if> -->
-            <!-- <if test="userName != null and userName != ''"> -->
-            <!--     and user_name like CONCAT ('%',#{userName},'%') -->
-            <!-- </if> -->
-            <!-- <if test="publishTimeStart != null"> -->
-            <!--     and publish_time <![CDATA[ >= ]]> #{publishTimeStart} -->
-            <!-- </if> -->
-            <!-- <if test="publishTimeEnd != null"> -->
-            <!--     and publish_time <![CDATA[ <= ]]> #{publishTimeEnd} -->
-            <!-- </if> -->
             <if test="searchValue != null and searchValue != ''">
-                description like CONCAT ('%', #{searchValue}, '%')
+                and description like CONCAT ('%', #{searchValue}, '%')
+            </if>
+            <if test="owner == true">
+                and issuer_id = #{loginUserId}
             </if>
             and available = '1'
         </where>

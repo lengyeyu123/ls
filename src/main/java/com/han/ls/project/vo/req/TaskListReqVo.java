@@ -30,4 +30,11 @@ public class TaskListReqVo {
     @Min(1)
     private Integer pageSize;
 
+    /**
+     * 是否为当前登录用户发布的任务
+     */
+    private boolean owner;
+
+    private int loginUserId;
+
 }

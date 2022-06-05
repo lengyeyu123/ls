@@ -60,6 +60,9 @@ public class TaskService {
 
     @SneakyThrows
     public List<Task> list(TaskListReqVo reqVo) {
+        if (reqVo.isOwner()) {
+            reqVo.setLoginUserId(LsUtils.getLoginUser().getId());
+        }
         PageHelper.startPage(reqVo);
         List<Task> list = taskMapper.list(reqVo);
         for (Task task : list) {

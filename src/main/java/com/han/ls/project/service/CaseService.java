@@ -79,13 +79,15 @@ public class CaseService {
         for (Case aCase : list) {
             aCase.setImgArr(JsonUtils.josn2StrList(aCase.getDescImgs()));
         }
-        int userId = LsUtils.getLoginUser().getId();
-        List<Integer> caseIdList = list.stream().map(Case::getId).collect(Collectors.toList());
-        List<UserCase> userCaseList = caseMapper.selectUserCase(userId, caseIdList);
-        for (UserCase userCase : userCaseList) {
-            for (Case aCase : list) {
-                if (userCase.getCaseId() == aCase.getId()) {
-                    aCase.setCollectFlag(true);
+        if (reqVo.isCollectSearch()) {
+            int userId = LsUtils.getLoginUser().getId();
+            List<Integer> caseIdList = list.stream().map(Case::getId).collect(Collectors.toList());
+            List<UserCase> userCaseList = caseMapper.selectUserCase(userId, caseIdList);
+            for (UserCase userCase : userCaseList) {
+                for (Case aCase : list) {
+                    if (userCase.getCaseId() == aCase.getId()) {
+                        aCase.setCollectFlag(true);
+                    }
                 }
             }
         }
