@@ -39,9 +39,6 @@ public class LoginService {
     private TokenService tokenService;
 
     @Autowired
-    private AddressService addressService;
-
-    @Autowired
     private WxMaProperties wxMaProperties;
 
     @Autowired
@@ -109,6 +106,7 @@ public class LoginService {
             jscode2session = maService.jsCode2SessionInfo(code);
         } catch (WxErrorException e) {
             log.error("获取微信服务器用户信息失败", e);
+            throw new ServiceException();
         }
         WxMaUserInfo wxMaUserInfo = new WxMaUserInfo();
         wxMaUserInfo.setOpenId(jscode2session.getOpenid());

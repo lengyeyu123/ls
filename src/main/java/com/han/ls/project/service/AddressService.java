@@ -61,4 +61,16 @@ public class AddressService {
     public County selectCountyById(int countyId) {
         return addressMapper.selectCountyById(countyId);
     }
+
+    public List<City> selectCityByProvinceName(String name) {
+        return addressMapper.selectCityByProvinceName(name);
+    }
+
+    public List<County> selectCountyByCityName(String name) {
+        return addressMapper.selectCountyByCityName(name);
+    }
+
+    public County selectCountyByName(String name) {
+        return addressMapper.selectCountyByName(name);
+    }
 }

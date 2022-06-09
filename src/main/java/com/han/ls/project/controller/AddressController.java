@@ -27,8 +27,13 @@ public class AddressController {
     }
 
     @GetMapping("/selectCityByProvinceId")
-    public R<List<City>> selectCityByProvinceId(Integer id) {
+    public R<List<City>> selectCityByProvinceId(int id) {
         return R.success(addressService.selectCityByProvinceId(id));
+    }
+
+    @GetMapping("/selectCityByProvinceName")
+    public R<List<City>> selectCityByProvinceName(String name) {
+        return R.success(addressService.selectCityByProvinceName(name));
     }
 
     @GetMapping("/selectCountyByCityId")
@@ -36,4 +41,8 @@ public class AddressController {
         return R.success(addressService.selectCountByCityId(id));
     }
 
+    @GetMapping("/selectCountyByCityName")
+    public  R<List<County>> selectCountyByCityName(String name) {
+        return R.success(addressService.selectCountyByCityName(name));
+    }
 }

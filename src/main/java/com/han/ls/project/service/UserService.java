@@ -68,7 +68,7 @@ public class UserService {
     public User updateUserInfo(UpdateUserInfoReqVo reqVo) {
         User loginUser = LsUtils.getLoginUser();
         if (StringUtils.isBlank(reqVo.getAddress()) && StringUtils.isBlank(reqVo.getPhone())
-                && reqVo.getCountyId() == 0 && StringUtils.isBlank(reqVo.getWxCode())
+                && StringUtils.isBlank(reqVo.getCountyName()) && StringUtils.isBlank(reqVo.getWxCode())
                 && reqVo.getDutyId() == 0 && StringUtils.isBlank(reqVo.getUserName())
                 && StringUtils.isBlank(reqVo.getAvatarUrl())
         ) {
@@ -86,8 +86,8 @@ public class UserService {
             }
         }
 
-        if (reqVo.getCountyId() > 0) {
-            County county = addressService.selectCountyById(reqVo.getCountyId());
+        if (StringUtils.isNotBlank(reqVo.getCountyName())) {
+            County county = addressService.selectCountyByName(reqVo.getCountyName());
             loginUser.setCounty(county);
         }
         if (reqVo.getDutyId() > 0) {

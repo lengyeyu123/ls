@@ -85,4 +85,21 @@
         from ls_county
         where id = #{countyId}
     </select>
+    <select id="selectCityByProvinceName" resultType="com.han.ls.project.domain.City">
+        SELECT *
+        FROM ls_city
+        WHERE province_name = #{name}
+        ORDER BY `code`
+    </select>
+    <select id="selectCountyByCityName" resultType="com.han.ls.project.domain.County">
+        SELECT *
+        FROM ls_county
+        WHERE city_name = #{name}
+        ORDER BY `code`
+    </select>
+    <select id="selectCountyByName" resultType="com.han.ls.project.domain.County">
+        select *
+        from ls_county
+        where name = #{name}
+    </select>
 </mapper>

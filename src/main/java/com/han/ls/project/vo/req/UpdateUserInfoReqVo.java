@@ -17,6 +17,8 @@ public class UpdateUserInfoReqVo {
 
     private int countyId;
 
+    private String countyName;
+
     private int dutyId;
 
 }

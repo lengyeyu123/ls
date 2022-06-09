@@ -28,4 +28,10 @@ public interface AddressMapper {
     List<County> selectCountByCityId(int id);
 
     County selectCountyById(int countyId);
+
+    List<City> selectCityByProvinceName(String name);
+
+    List<County> selectCountyByCityName(String name);
+
+    County selectCountyByName(String name);
 }
