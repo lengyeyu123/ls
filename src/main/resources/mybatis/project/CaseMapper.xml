@@ -21,11 +21,8 @@
     </delete>
     <select id="list" parameterType="com.han.ls.project.vo.req.CaseListReqVo"
             resultType="com.han.ls.project.domain.Case">
-        select ls_case.*
+        select ls_case.*,ls_user.phone,ls_user.wx_code
         from ls_case, ls_user
-        <if test="collectSearch == true">
-            ,ls_user_case
-        </if>
         <where>
             ls_case.user_id = ls_user.id
             <!-- <if test="userName != null and userName != ''"> -->
@@ -35,10 +32,8 @@
             <!--     and description like CONCAT ('%',#{description},'%') -->
             <!-- </if> -->
             <if test="searchValue != null and searchValue != ''">
-                and (ls_user.user_name like CONCAT ('%', #{searchValue}, '%') or ls_case.description like CONCAT ('%',#{searchValue},'%'))
-            </if>
-            <if test="collectSearch == true">
-                and ls_user_case.case_id = ls_case.id and ls_user_case.user_id = #{userId}
+                and (ls_user.user_name like CONCAT ('%', #{searchValue}, '%') or ls_case.description like CONCAT
+                ('%',#{searchValue},'%') or ls_case.address like CONCAT ('%',#{searchValue},'%'))
             </if>
             and ls_case.available = '1'
         </where>

@@ -12,11 +12,11 @@ public class AddCaseReqVo {
     @NotBlank
     private String description;
 
-    private Integer countyId;
+    private int countyId;
 
     private String address;
 
     @NotNull
-    private List<String> descImgArr;
+    private List<String> imgArr;
 
 }

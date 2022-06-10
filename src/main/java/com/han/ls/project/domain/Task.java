@@ -21,6 +21,10 @@ public class Task {
 
     private int issuerId;
 
+    private String phone;
+
+    private String wxCode;
+
     private Date publishTime;
 
     private Date deadline;

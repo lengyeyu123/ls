@@ -33,17 +33,16 @@
 
     <select id="list" parameterType="com.han.ls.project.vo.req.TaskListReqVo"
             resultType="com.han.ls.project.domain.Task">
-        select * from ls_task
+        select ls_task.*, ls_user.phone, ls_user.wx_code from ls_task,ls_user
         <where>
+            and ls_task.issuer_id = ls_user.id
             <if test="searchValue != null and searchValue != ''">
-                and description like CONCAT ('%', #{searchValue}, '%')
+                and (ls_task.description like CONCAT ('%', #{searchValue}, '%') or ls_user.user_name like CONCAT ('%',
+                #{searchValue}, '%') )
             </if>
-            <if test="owner == true">
-                and issuer_id = #{loginUserId}
-            </if>
-            and available = '1'
+            and ls_task.available = '1'
         </where>
-        order by create_time desc
+        order by ls_task.create_time desc
     </select>
     <select id="selectById" resultType="com.han.ls.project.domain.Task">
         select *

@@ -67,19 +67,21 @@ public class CaseService {
                 .setDescription(reqVo.getDescription())
                 .setCountyId(reqVo.getCountyId())
                 .setAddress(reqVo.getAddress())
-                .setDescImgs(JsonUtils.toJson(reqVo.getDescImgArr())));
+                .setDescImgs(JsonUtils.toJson(reqVo.getImgArr())));
     }
 
     public List<Case> list(CaseListReqVo reqVo) {
-        if (reqVo.isCollectSearch()) {
+        if (LsUtils.getLoginUser() != null) {
             reqVo.setUserId(LsUtils.getLoginUser().getId());
         }
+
         PageHelper.startPage(reqVo);
         List<Case> list = caseMapper.list(reqVo);
         for (Case aCase : list) {
             aCase.setImgArr(JsonUtils.josn2StrList(aCase.getDescImgs()));
         }
-        if (reqVo.isCollectSearch()) {
+
+        if (LsUtils.getLoginUser() != null) {
             int userId = LsUtils.getLoginUser().getId();
             List<Integer> caseIdList = list.stream().map(Case::getId).collect(Collectors.toList());
             List<UserCase> userCaseList = caseMapper.selectUserCase(userId, caseIdList);

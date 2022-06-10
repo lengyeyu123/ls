@@ -13,6 +13,10 @@ public class Case {
 
     private int userId;
 
+    private String phone;
+
+    private String wxCode;
+
     private String description;
 
     private int countyId;
