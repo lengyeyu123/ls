@@ -38,6 +38,19 @@
             and ls_case.available = '1'
         </where>
     </select>
+
+    <select id="collectList" parameterType="com.han.ls.project.vo.req.CaseListReqVo"
+            resultType="com.han.ls.project.domain.Case">
+        select ls_case.*,ls_user.phone,ls_user.wx_code
+        from ls_case, ls_user, ls_user_case
+        <where>
+            ls_case.user_id = ls_user.id
+            and ls_case.id = ls_user_case.case_id
+            and ls_user_case.user_id = #{userId}
+            and ls_case.available = '1'
+        </where>
+    </select>
+
     <select id="selectUserCase" resultType="com.han.ls.project.domain.UserCase">
         select *
         from ls_user_case

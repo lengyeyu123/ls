@@ -28,6 +28,10 @@ public class CaseController {
     public R<?> list(@RequestBody @Validated CaseListReqVo reqVo) {
         return R.success(new PageInfo<>(caseService.list(reqVo)));
     }
+    @PostMapping("/collectList")
+    public R<?> collectList(@RequestBody @Validated CaseListReqVo reqVo) {
+        return R.success(new PageInfo<>(caseService.collectList(reqVo)));
+    }
 
     @GetMapping("/collectOrUndo")
     public R<?> collectOrUndo(int id) {

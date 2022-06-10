@@ -20,4 +20,6 @@ public interface CaseMapper {
     List<UserCase> selectUserCase(@Param("userId") int userId, @Param("caseIdList") List<Integer> caseIdList);
 
     int countByUserIdAndCaseId(@Param("userId") int userId, @Param("caseId") int caseId);
+
+    List<Case> collectList(CaseListReqVo reqVo);
 }

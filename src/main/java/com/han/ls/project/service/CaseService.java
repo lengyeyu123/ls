@@ -96,6 +96,18 @@ public class CaseService {
         return list;
     }
 
+    public List<Case> collectList(CaseListReqVo reqVo) {
+        int id = LsUtils.getLoginUser().getId();
+        reqVo.setUserId(id);
+        PageHelper.startPage(reqVo);
+        List<Case> list = caseMapper.collectList(reqVo);
+        for (Case aCase : list) {
+            aCase.setImgArr(JsonUtils.josn2StrList(aCase.getDescImgs()));
+            aCase.setCollectFlag(true);
+        }
+        return list;
+    }
+
     @GetMapping("/collectOrUndo")
     public void collectOrUndo(int id) {
         int userId = LsUtils.getLoginUser().getId();
