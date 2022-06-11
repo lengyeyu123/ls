@@ -25,12 +25,6 @@
         from ls_case, ls_user
         <where>
             ls_case.user_id = ls_user.id
-            <!-- <if test="userName != null and userName != ''"> -->
-            <!--     and userName like CONCAT ('%', #{userName}, '%') -->
-            <!-- </if> -->
-            <!-- <if test="description != null and description != ''"> -->
-            <!--     and description like CONCAT ('%',#{description},'%') -->
-            <!-- </if> -->
             <if test="searchValue != null and searchValue != ''">
                 and (ls_user.user_name like CONCAT ('%', #{searchValue}, '%') or ls_case.description like CONCAT
                 ('%',#{searchValue},'%') or ls_case.address like CONCAT ('%',#{searchValue},'%'))
