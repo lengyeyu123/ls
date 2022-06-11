@@ -18,4 +18,7 @@ public interface TaskMapper {
     void update(Task updateTask);
 
     void disable(int id);
+
+    List<Task> myTaskList(TaskListReqVo reqVo);
+
 }

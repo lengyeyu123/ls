@@ -30,6 +30,11 @@ public class TaskController {
         return R.success(new PageInfo<>(taskService.list(reqVo)));
     }
 
+    @PostMapping("/myTaskList")
+    public R<?> myTaskList(@RequestBody @Validated TaskListReqVo reqVo) {
+        return R.success(new PageInfo<>(taskService.myTaskList(reqVo)));
+    }
+
     @PostMapping("/finish")
     public R<?> finish(@RequestBody @Validated FinishTaskReqVo reqVo) {
         taskService.finish(reqVo);

@@ -49,5 +49,15 @@
         from ls_task
         where id = #{id}
     </select>
+    <select id="myTaskList" parameterType="com.han.ls.project.vo.req.TaskListReqVo"
+            resultType="com.han.ls.project.domain.Task">
+        select ls_task.*, ls_user.phone, ls_user.wx_code from ls_task,ls_user
+        <where>
+            and ls_task.issuer_id = ls_user.id
+            and ls_task.issuer_id = #{userId}
+            and ls_task.available = '1'
+        </where>
+        order by ls_task.create_time desc
+    </select>
 
 </mapper>

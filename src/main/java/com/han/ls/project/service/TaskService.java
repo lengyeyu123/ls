@@ -71,6 +71,19 @@ public class TaskService {
         return list;
     }
 
+    public List<Task> myTaskList(TaskListReqVo reqVo) {
+        reqVo.setUserId(LsUtils.getLoginUser().getId());
+        PageHelper.startPage(reqVo);
+        List<Task> list = taskMapper.myTaskList(reqVo);
+        for (Task task : list) {
+            String descImgs = task.getDescImgs();
+            if (StringUtils.isNotBlank(descImgs)) {
+                task.setImgArr(JsonUtils.josn2StrList(descImgs));
+            }
+        }
+        return list;
+    }
+
     public void finish(FinishTaskReqVo reqVo) {
         User loginUser = LsUtils.getLoginUser();
         Date now = new Date();

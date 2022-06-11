@@ -21,6 +21,8 @@ public class TaskListReqVo {
 
     private String searchValue;
 
+    private int userId;
+
     // 分页
     @NotNull
     @Min(1)
