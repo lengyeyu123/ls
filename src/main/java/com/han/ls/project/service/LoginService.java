@@ -3,8 +3,6 @@ package com.han.ls.project.service;
 import cn.binarywang.wx.miniapp.api.WxMaService;
 import cn.binarywang.wx.miniapp.bean.WxMaJscode2SessionResult;
 import cn.binarywang.wx.miniapp.bean.WxMaUserInfo;
-import com.han.ls.common.constant.LsConstants;
-import com.han.ls.common.enums.ResultStatus;
 import com.han.ls.common.exception.ServiceException;
 import com.han.ls.framework.config.WxMaConfiguration;
 import com.han.ls.framework.config.properties.WxMaProperties;
@@ -51,32 +49,13 @@ public class LoginService {
      * @return
      */
     public LoginRespVo login(LoginReqVo reqVo) {
-        String openId;
-        WxMaUserInfo wxMaUserInfo;
-        if (StringUtils.isBlank(reqVo.getOpenId())) {
-            wxMaUserInfo = getWxMaUserInfo(reqVo.getCode());
-            openId = wxMaUserInfo.getOpenId();
-        } else {
-            openId = reqVo.getOpenId();
-            wxMaUserInfo = new WxMaUserInfo();
-            wxMaUserInfo.setUnionId("测试");
-            wxMaUserInfo.setOpenId(reqVo.getOpenId());
-            wxMaUserInfo.setNickName("测试");
-            wxMaUserInfo.setAvatarUrl("测试");
-        }
-
+        WxMaUserInfo wxMaUserInfo = getWxMaUserInfo(reqVo.getCode());
+        String openId = wxMaUserInfo.getOpenId();
 
         User user = userMapper.selectByOpenId(openId);
         if (user == null) {
             user = userService.register(wxMaUserInfo);
-            user.setAvailable(LsConstants.USER_STATUS_NORMAL);
         }
-        // 用户是否被禁用
-        if (user.getAvailable().equals(LsConstants.USER_STATUS_DISABLED)) {
-            // 用户已经被禁用
-            throw new ServiceException(ResultStatus.USER_STATUS_DISABLED);
-        }
-
         //使用Authentication的实现类
         Authentication authentication = new UsernamePasswordAuthenticationToken(user.getOpenId(), user.getOpenId());
         //手动调用方法去认证 他会自动调用UserDetailsService查 然后对比啥的

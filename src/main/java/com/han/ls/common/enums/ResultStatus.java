@@ -11,7 +11,7 @@ public enum ResultStatus {
 
     INVALID_TOKEN(-1, "未登录，请登录后使用"),
 
-    USER_STATUS_DISABLED(50101, "已被禁用"),
+    ACCOUNT_ERROR(50101, "账户异常"),
 
     VIOLATION_CONTENT(50102, "您上传的内容不安全，请重新编辑后上传"),
 

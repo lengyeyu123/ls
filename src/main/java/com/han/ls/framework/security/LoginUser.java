@@ -49,6 +49,6 @@ public class LoginUser implements UserDetails {
 
     @Override
     public boolean isEnabled() {  //是否可用
-        return true;
+        return this.user.getAvailable().equals("1");
     }
 }
