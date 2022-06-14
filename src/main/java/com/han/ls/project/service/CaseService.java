@@ -67,7 +67,9 @@ public class CaseService {
                 .setDescription(reqVo.getDescription())
                 .setCountyId(reqVo.getCountyId())
                 .setAddress(reqVo.getAddress())
-                .setDescImgs(JsonUtils.toJson(reqVo.getImgArr())));
+                .setDescImgs(JsonUtils.toJson(reqVo.getImgArr()))
+                .setCreateTime(new Date())
+        );
     }
 
     public List<Case> list(CaseListReqVo reqVo) {

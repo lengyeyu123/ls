@@ -6,8 +6,8 @@
 
 
     <insert id="add" parameterType="com.han.ls.project.domain.Case">
-        insert into ls_case (user_id, description, county_id, address, desc_imgs)
-        values (#{userId}, #{description}, #{countyId}, #{address}, #{descImgs})
+        insert into ls_case (user_id, description, county_id, address, desc_imgs, create_time)
+        values (#{userId}, #{description}, #{countyId}, #{address}, #{descImgs}, #{createTime})
     </insert>
     <insert id="collectCase" parameterType="com.han.ls.project.domain.UserCase">
         insert into ls_user_case (user_id, case_id, create_time)
@@ -31,6 +31,7 @@
             </if>
             and ls_case.available = '1'
         </where>
+        order by ls_case.create_time desc
     </select>
 
     <select id="collectList" parameterType="com.han.ls.project.vo.req.CaseListReqVo"
@@ -43,6 +44,7 @@
             and ls_user_case.user_id = #{userId}
             and ls_case.available = '1'
         </where>
+        order by ls_case.create_time desc
     </select>
 
     <select id="selectUserCase" resultType="com.han.ls.project.domain.UserCase">

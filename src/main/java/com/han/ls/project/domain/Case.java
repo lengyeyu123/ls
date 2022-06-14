@@ -3,6 +3,7 @@ package com.han.ls.project.domain;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -32,6 +33,12 @@ public class Case {
      * 收藏标志
      */
     private boolean collectFlag;
+
+
+    /**
+     * 创建时间
+     */
+    private Date createTime;
 
     /**
      * 是否可见 1:可见 0:不可见
