@@ -11,6 +11,7 @@ import com.han.ls.framework.config.WxMaConfiguration;
 import com.han.ls.framework.config.properties.WxMaProperties;
 import com.han.ls.framework.utils.LsUtils;
 import com.han.ls.project.domain.Case;
+import com.han.ls.project.domain.Duty;
 import com.han.ls.project.domain.User;
 import com.han.ls.project.domain.UserCase;
 import com.han.ls.project.mapper.CaseMapper;
@@ -36,6 +37,9 @@ public class CaseService {
 
     @Autowired
     private CaseMapper caseMapper;
+
+    @Autowired
+    private DutyService dutyService;
 
     @SneakyThrows
     public int add(AddCaseReqVo reqVo) {
@@ -92,6 +96,10 @@ public class CaseService {
             reqVo.setUserId(LsUtils.getLoginUser().getId());
         }
 
+        if (StringUtils.isNotBlank(reqVo.getDutyName())) {
+            Duty duty = dutyService.selectByName(reqVo.getDutyName());
+            reqVo.setDutyId(duty.getId());
+        }
         PageHelper.startPage(reqVo);
         List<Case> list = caseMapper.list(reqVo);
         for (Case aCase : list) {

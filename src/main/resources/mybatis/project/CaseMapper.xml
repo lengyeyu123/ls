@@ -34,6 +34,9 @@
         from ls_case, ls_user
         <where>
             ls_case.user_id = ls_user.id
+            <if test="dutyId > 0">
+                and ls_case.duty_ids like CONCAT('%', #{dutyId}, '%')
+            </if>
             <if test="searchValue != null and searchValue != ''">
                 and (ls_user.user_name like CONCAT ('%', #{searchValue}, '%') or ls_case.description like CONCAT
                 ('%',#{searchValue},'%') or ls_case.address like CONCAT ('%',#{searchValue},'%'))

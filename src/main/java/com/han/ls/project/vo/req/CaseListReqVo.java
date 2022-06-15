@@ -19,6 +19,8 @@ public class CaseListReqVo {
 
     private String dutyName;
 
+    private int dutyId;
+
     private String description;
 
     private String userName;
