@@ -11,7 +11,7 @@
  Target Server Version : 50540
  File Encoding         : 65001
 
- Date: 14/06/2022 17:09:29
+ Date: 15/06/2022 15:57:56
 */
 
 SET NAMES utf8mb4;
@@ -3256,22 +3256,28 @@ CREATE TABLE `ls_case`  (
   `county_id` int(11) NULL DEFAULT NULL,
   `address` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `desc_imgs` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `duty_ids` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `create_time` datetime NULL DEFAULT NULL,
   `available` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '1',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of ls_case
 -- ----------------------------
-INSERT INTO `ls_case` VALUES (1, 8, 'afdsa', 0, NULL, '[\"/lsImgUpload/case/image/20220610/oMvZf4-AgoG6u8DINGFcRZlMUAGk/5d2a8a4102a146bc90818ff2d60fe1bf-0.png\",\"/lsImgUpload/case/image/20220610/oMvZf4-AgoG6u8DINGFcRZlMUAGk/f2518d727b404885add3aa373dbe3c93-0.png\"]', '2022-06-14 11:30:36', '1');
-INSERT INTO `ls_case` VALUES (3, 8, '666', 0, '人民西路567号金地·金域华府1号楼(第十三中学西邻)尚客优精选酒店(衡水人民路金域华府十三中学店)', '[\"/lsImgUpload/case/image/20220610/oMvZf4-AgoG6u8DINGFcRZlMUAGk/b34fcb8d592647aebe791ce460927bb8-0.png\"]', '2022-06-14 11:30:36', '1');
-INSERT INTO `ls_case` VALUES (4, 8, '55', 0, '阳坊涮肉(育才街店)', '[\"/lsImgUpload/case/image/20220610/oMvZf4-AgoG6u8DINGFcRZlMUAGk/fb9076cfba97494e91d1e64f99ed6090-0.png\"]', '2022-06-14 11:30:39', '1');
-INSERT INTO `ls_case` VALUES (5, 8, '55', 0, '人民西路568号衡水市桃城区政府', '[\"/lsImgUpload/case/image/20220610/oMvZf4-AgoG6u8DINGFcRZlMUAGk/9c5e04cf4e2a487b903251b9efe1cb43-0.png\"]', '2022-06-14 11:30:36', '1');
-INSERT INTO `ls_case` VALUES (6, 8, '12', 0, '河北省衡水市桃城区人民西路567号金地·金域华府', '[\"/lsImgUpload/case/image/20220614/oMvZf4-AgoG6u8DINGFcRZlMUAGk/810246eeb73c4adfad03d349e76da800-0.png\"]', '2022-06-14 11:30:36', '1');
-INSERT INTO `ls_case` VALUES (7, 8, 'asd', 0, '河北省衡水市桃城区人民西路567号金地·金域华府1号楼(第十三中学西邻)尚客优精选酒店(衡水人民路金域华府十三中学店)', '[\"/lsImgUpload/case/image/20220614/oMvZf4-AgoG6u8DINGFcRZlMUAGk/bcce05cca44e44ca993a68c9eee21a9d-0.png\"]', '2022-06-14 11:30:36', '1');
-INSERT INTO `ls_case` VALUES (8, 8, 'ssss', 0, '河北省衡水市桃城区人民西路568号衡水市桃城区政府', '[\"/lsImgUpload/case/image/20220614/oMvZf4-AgoG6u8DINGFcRZlMUAGk/5e64ef1c2d5f4f17a5a6fbc32bda8232-0.png\"]', '2022-06-14 11:30:36', '1');
-INSERT INTO `ls_case` VALUES (9, 8, 'sss', 0, '河北省衡水市桃城区人民西路568号衡水市桃城区政府', '[\"/lsImgUpload/case/image/20220614/oMvZf4-AgoG6u8DINGFcRZlMUAGk/69bfdc4859754a3abaf732c0ca425575-0.png\",\"/lsImgUpload/case/image/20220614/oMvZf4-AgoG6u8DINGFcRZlMUAGk/b91beafac7ea4a1cad02a9b55b9f9b4c-0.png\"]', '2022-06-14 11:33:46', '1');
+INSERT INTO `ls_case` VALUES (1, 8, 'afdsa', 0, NULL, '[\"/lsImgUpload/case/image/20220610/oMvZf4-AgoG6u8DINGFcRZlMUAGk/5d2a8a4102a146bc90818ff2d60fe1bf-0.png\",\"/lsImgUpload/case/image/20220610/oMvZf4-AgoG6u8DINGFcRZlMUAGk/f2518d727b404885add3aa373dbe3c93-0.png\"]', '1', '2022-06-14 11:30:36', '1');
+INSERT INTO `ls_case` VALUES (3, 8, '666', 0, '人民西路567号金地·金域华府1号楼(第十三中学西邻)尚客优精选酒店(衡水人民路金域华府十三中学店)', '[\"/lsImgUpload/case/image/20220610/oMvZf4-AgoG6u8DINGFcRZlMUAGk/b34fcb8d592647aebe791ce460927bb8-0.png\"]', '2', '2022-06-14 11:30:36', '1');
+INSERT INTO `ls_case` VALUES (4, 8, '55', 0, '阳坊涮肉(育才街店)', '[\"/lsImgUpload/case/image/20220610/oMvZf4-AgoG6u8DINGFcRZlMUAGk/fb9076cfba97494e91d1e64f99ed6090-0.png\"]', '1', '2022-06-14 11:30:39', '1');
+INSERT INTO `ls_case` VALUES (5, 8, '55', 0, '人民西路568号衡水市桃城区政府', '[\"/lsImgUpload/case/image/20220610/oMvZf4-AgoG6u8DINGFcRZlMUAGk/9c5e04cf4e2a487b903251b9efe1cb43-0.png\"]', '2', '2022-06-14 11:30:36', '1');
+INSERT INTO `ls_case` VALUES (6, 8, '12', 0, '河北省衡水市桃城区人民西路567号金地·金域华府', '[\"/lsImgUpload/case/image/20220614/oMvZf4-AgoG6u8DINGFcRZlMUAGk/810246eeb73c4adfad03d349e76da800-0.png\"]', '2', '2022-06-14 11:30:36', '1');
+INSERT INTO `ls_case` VALUES (7, 8, 'asd', 0, '河北省衡水市桃城区人民西路567号金地·金域华府1号楼(第十三中学西邻)尚客优精选酒店(衡水人民路金域华府十三中学店)', '[\"/lsImgUpload/case/image/20220614/oMvZf4-AgoG6u8DINGFcRZlMUAGk/bcce05cca44e44ca993a68c9eee21a9d-0.png\"]', '1', '2022-06-14 11:30:36', '1');
+INSERT INTO `ls_case` VALUES (8, 8, 'ssss', 0, '河北省衡水市桃城区人民西路568号衡水市桃城区政府', '[\"/lsImgUpload/case/image/20220614/oMvZf4-AgoG6u8DINGFcRZlMUAGk/5e64ef1c2d5f4f17a5a6fbc32bda8232-0.png\"]', '1', '2022-06-14 11:30:36', '1');
+INSERT INTO `ls_case` VALUES (9, 8, 'sss', 0, '河北省衡水市桃城区人民西路568号衡水市桃城区政府', '[\"/lsImgUpload/case/image/20220614/oMvZf4-AgoG6u8DINGFcRZlMUAGk/69bfdc4859754a3abaf732c0ca425575-0.png\",\"/lsImgUpload/case/image/20220614/oMvZf4-AgoG6u8DINGFcRZlMUAGk/b91beafac7ea4a1cad02a9b55b9f9b4c-0.png\"]', '1', '2022-06-14 11:33:46', '1');
+INSERT INTO `ls_case` VALUES (10, 8, '1213', 0, '河北省衡水市桃城区永安西路1268号北斗星城6区', '[\"/lsImgUpload/case/image/20220615/oMvZf4-AgoG6u8DINGFcRZlMUAGk/820eabf7052340068ed3fdfba4d1e197-0.jpg\",\"/lsImgUpload/case/image/20220615/oMvZf4-AgoG6u8DINGFcRZlMUAGk/a50ccadcdffd44da8c2634b83197828b-0.jpg\"]', '1', '2022-06-15 09:44:27', '1');
+INSERT INTO `ls_case` VALUES (11, 8, '12', 0, '河北省衡水市桃城区人民西路567号金地·金域华府', '[\"/lsImgUpload/case/image/20220615/oMvZf4-AgoG6u8DINGFcRZlMUAGk/1c7fe6f85b5b45749dadb3f836ea12a7-0.png\"]', '1,2', '2022-06-15 14:23:57', '1');
+INSERT INTO `ls_case` VALUES (12, 8, '12', 0, '河北省衡水市桃城区人民西路567号金地·金域华府', '[\"/lsImgUpload/case/image/20220615/oMvZf4-AgoG6u8DINGFcRZlMUAGk/1c7fe6f85b5b45749dadb3f836ea12a7-0.png\"]', '1,2', '2022-06-15 14:24:38', '1');
+INSERT INTO `ls_case` VALUES (13, 8, '555', 0, '河北省衡水市桃城区人民西路567号金地·金域华府1号楼(第十三中学西邻)尚客优精选酒店(衡水人民路金域华府十三中学店)', '[\"/lsImgUpload/case/image/20220615/oMvZf4-AgoG6u8DINGFcRZlMUAGk/2da6a127b5e4406a9ff3db56dd9a2192-0.png\"]', '1', '2022-06-15 14:33:56', '1');
+INSERT INTO `ls_case` VALUES (14, 8, 'lll', 0, '河北省衡水市桃城区人民西路568号衡水市桃城区政府', '[\"/lsImgUpload/case/image/20220615/oMvZf4-AgoG6u8DINGFcRZlMUAGk/27bf087f76c4491899189ff9b1f71139-0.png\"]', '2,1', '2022-06-15 14:39:08', '1');
 
 -- ----------------------------
 -- Table structure for ls_city
@@ -6460,13 +6466,15 @@ CREATE TABLE `ls_duty`  (
   `name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `order_no` int(11) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `name`(`name`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of ls_duty
 -- ----------------------------
 INSERT INTO `ls_duty` VALUES (1, '水电', '水电修改', 1);
+INSERT INTO `ls_duty` VALUES (2, '油漆', '腻子喷子', 2);
 
 -- ----------------------------
 -- Table structure for ls_duty_addr_price
@@ -6563,27 +6571,31 @@ CREATE TABLE `ls_task`  (
   `finish_user_id` int(11) NULL DEFAULT NULL,
   `finish_imgs` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `case_id` int(11) NULL DEFAULT NULL,
-  `satisfaction` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `satisfaction` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '满意度',
+  `duty_ids` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `create_time` datetime NULL DEFAULT NULL,
   `update_time` datetime NULL DEFAULT NULL,
   `available` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '1',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of ls_task
 -- ----------------------------
-INSERT INTO `ls_task` VALUES (4, 'ww', '[\"/lsImgUpload/task/image/20220609/oMvZf4-AgoG6u8DINGFcRZlMUAGk/e33ca99a316b45079ee09c833983dc11-0.png\"]', 8, '2022-06-09 15:39:26', '2022-06-23 00:00:00', NULL, NULL, NULL, NULL, NULL, '2022-06-09 15:39:26', NULL, '1');
-INSERT INTO `ls_task` VALUES (5, 'bbb', '[\"/lsImgUpload/task/image/20220609/oMvZf4-AgoG6u8DINGFcRZlMUAGk/67032c8e50354a5a992815e8c3c6c2c1-0.png\",\"/lsImgUpload/task/image/20220609/oMvZf4-AgoG6u8DINGFcRZlMUAGk/d3beb4b51f2043c9accd148630973155-0.png\"]', 8, '2022-06-09 15:44:08', '2022-06-30 00:00:00', NULL, NULL, NULL, NULL, NULL, '2022-06-09 15:44:08', NULL, '1');
-INSERT INTO `ls_task` VALUES (6, 'yyy', '[\"/lsImgUpload/task/image/20220609/oMvZf4-AgoG6u8DINGFcRZlMUAGk/ba99e3b367f448118236733f661719e0-0.png\"]', 8, '2022-06-09 15:45:31', '2022-09-21 00:00:00', NULL, NULL, NULL, NULL, NULL, '2022-06-09 15:45:31', NULL, '1');
-INSERT INTO `ls_task` VALUES (7, 'mm,,,,,,,😈', '[\"/lsImgUpload/task/image/20220609/oMvZf4-AgoG6u8DINGFcRZlMUAGk/c0dad8b1ce3a4560b1ad25726e4eb271-0.png\"]', 8, '2022-06-09 15:49:26', '2022-06-11 00:00:00', NULL, NULL, NULL, NULL, NULL, '2022-06-09 15:49:26', '2022-06-09 15:50:10', '1');
-INSERT INTO `ls_task` VALUES (8, '99', '[\"/lsImgUpload/task/image/20220609/oMvZf4-AgoG6u8DINGFcRZlMUAGk/47e4687c6a54425db1ea895ce382f9ea-0.png\"]', 8, '2022-06-09 15:50:43', '2022-06-28 00:00:00', NULL, NULL, NULL, NULL, NULL, '2022-06-09 15:50:43', NULL, '1');
-INSERT INTO `ls_task` VALUES (9, '33', '[\"/lsImgUpload/task/image/20220609/oMvZf4-AgoG6u8DINGFcRZlMUAGk/fc65ab1be029412b9511ed9c3e987be0-0.png\"]', 8, '2022-06-09 15:58:48', '2022-06-17 00:00:00', NULL, NULL, NULL, NULL, NULL, '2022-06-09 15:58:48', NULL, '1');
-INSERT INTO `ls_task` VALUES (10, '123', '[\"/lsImgUpload/task/image/20220609/oMvZf4-AgoG6u8DINGFcRZlMUAGk/f267c5af0551420ea553d43304c62bce-0.png\",\"/lsImgUpload/task/image/20220609/oMvZf4-AgoG6u8DINGFcRZlMUAGk/5d34241e17194fbf8880865d20da7801-0.png\",\"/lsImgUpload/task/image/20220609/oMvZf4-AgoG6u8DINGFcRZlMUAGk/f78e52a41b144987b049520f57305e48-0.png\",\"/lsImgUpload/task/image/20220609/oMvZf4-AgoG6u8DINGFcRZlMUAGk/74cdfbcc673144a4beba1f7889da0a7f-0.png\",\"/lsImgUpload/task/image/20220609/oMvZf4-AgoG6u8DINGFcRZlMUAGk/0a2c649a190b4a66a4acc739fcb3e495-0.png\",\"/lsImgUpload/task/image/20220609/oMvZf4-AgoG6u8DINGFcRZlMUAGk/e109177907e74ba8b07efe873102fabc-0.png\",\"/lsImgUpload/task/image/20220609/oMvZf4-AgoG6u8DINGFcRZlMUAGk/90c68372388f470faf647b576d0d3935-0.png\",\"/lsImgUpload/task/image/20220609/oMvZf4-AgoG6u8DINGFcRZlMUAGk/4b19aa44490f4bf69298077e779c02c1-0.png\"]', 8, '2022-06-09 17:14:19', '2022-06-23 00:00:00', NULL, NULL, NULL, NULL, NULL, '2022-06-09 17:14:19', NULL, '1');
-INSERT INTO `ls_task` VALUES (11, 'rrr', '[\"/lsImgUpload/task/image/20220609/oMvZf4-AgoG6u8DINGFcRZlMUAGk/400c839f9e774afba4be37ed473352a5-0.png\",\"/lsImgUpload/task/image/20220609/oMvZf4-AgoG6u8DINGFcRZlMUAGk/70e7d76e8cca47b2bc73979b9e7285f2-0.png\",\"/lsImgUpload/task/image/20220609/oMvZf4-AgoG6u8DINGFcRZlMUAGk/504dd9817daf462bb926c880757ca5e4-0.png\"]', 8, '2022-06-09 17:16:41', '2022-06-23 00:00:00', NULL, NULL, NULL, NULL, NULL, '2022-06-09 17:16:41', '2022-06-09 17:16:47', '1');
-INSERT INTO `ls_task` VALUES (12, 'afafdsa', '[\"/lsImgUpload/task/image/20220614/oMvZf4-AgoG6u8DINGFcRZlMUAGk/7f18001a9cdd4258a31a8f94619e3037-0.png\",\"/lsImgUpload/task/image/20220614/oMvZf4-AgoG6u8DINGFcRZlMUAGk/b53d7a2b7b1548bab572cbc791a0e9ca-0.png\",\"/lsImgUpload/task/image/20220614/oMvZf4-AgoG6u8DINGFcRZlMUAGk/74df4bac7b074ba29c7bb044b52f839c-0.png\",\"/lsImgUpload/task/image/20220614/oMvZf4-AgoG6u8DINGFcRZlMUAGk/9c710d9b007b41aa89b359a12d465eca-0.png\"]', 8, '2022-06-14 10:07:45', '2022-06-15 00:00:00', NULL, NULL, NULL, NULL, NULL, '2022-06-14 10:07:45', NULL, '1');
-INSERT INTO `ls_task` VALUES (13, '22', '[\"/lsImgUpload/task/image/20220614/oMvZf4-AgoG6u8DINGFcRZlMUAGk/dbe62ac7df674985b71be4cc0ff516db-0.png\"]', 8, '2022-06-14 11:01:24', '2022-06-24 00:00:00', NULL, NULL, NULL, NULL, NULL, '2022-06-14 11:01:24', '2022-06-14 11:02:07', '1');
-INSERT INTO `ls_task` VALUES (14, '666', '[\"/lsImgUpload/task/image/20220614/oMvZf4-AgoG6u8DINGFcRZlMUAGk/fe33ac4c25274998b4e0cff6b1075255-0.png\"]', 8, '2022-06-14 11:03:17', '2022-06-23 00:00:00', NULL, NULL, NULL, NULL, NULL, '2022-06-14 11:03:17', '2022-06-14 11:03:50', '1');
+INSERT INTO `ls_task` VALUES (4, 'ww', '[\"/lsImgUpload/task/image/20220609/oMvZf4-AgoG6u8DINGFcRZlMUAGk/e33ca99a316b45079ee09c833983dc11-0.png\"]', 8, '2022-06-09 15:39:26', '2022-06-23 00:00:00', NULL, NULL, NULL, NULL, NULL, '1', '2022-06-09 15:39:26', NULL, '1');
+INSERT INTO `ls_task` VALUES (5, 'bbb', '[\"/lsImgUpload/task/image/20220609/oMvZf4-AgoG6u8DINGFcRZlMUAGk/67032c8e50354a5a992815e8c3c6c2c1-0.png\",\"/lsImgUpload/task/image/20220609/oMvZf4-AgoG6u8DINGFcRZlMUAGk/d3beb4b51f2043c9accd148630973155-0.png\"]', 8, '2022-06-09 15:44:08', '2022-06-30 00:00:00', NULL, NULL, NULL, NULL, NULL, '1', '2022-06-09 15:44:08', NULL, '1');
+INSERT INTO `ls_task` VALUES (6, 'yyy', '[\"/lsImgUpload/task/image/20220609/oMvZf4-AgoG6u8DINGFcRZlMUAGk/ba99e3b367f448118236733f661719e0-0.png\"]', 8, '2022-06-09 15:45:31', '2022-09-21 00:00:00', NULL, NULL, NULL, NULL, NULL, '1', '2022-06-09 15:45:31', NULL, '1');
+INSERT INTO `ls_task` VALUES (7, 'mm,,,,,,,😈', '[\"/lsImgUpload/task/image/20220609/oMvZf4-AgoG6u8DINGFcRZlMUAGk/c0dad8b1ce3a4560b1ad25726e4eb271-0.png\"]', 8, '2022-06-09 15:49:26', '2022-06-11 00:00:00', NULL, NULL, NULL, NULL, NULL, '1', '2022-06-09 15:49:26', '2022-06-09 15:50:10', '1');
+INSERT INTO `ls_task` VALUES (8, '99', '[\"/lsImgUpload/task/image/20220609/oMvZf4-AgoG6u8DINGFcRZlMUAGk/47e4687c6a54425db1ea895ce382f9ea-0.png\"]', 8, '2022-06-09 15:50:43', '2022-06-28 00:00:00', NULL, NULL, NULL, NULL, NULL, '2', '2022-06-09 15:50:43', NULL, '1');
+INSERT INTO `ls_task` VALUES (9, '33', '[\"/lsImgUpload/task/image/20220609/oMvZf4-AgoG6u8DINGFcRZlMUAGk/fc65ab1be029412b9511ed9c3e987be0-0.png\"]', 8, '2022-06-09 15:58:48', '2022-06-17 00:00:00', NULL, NULL, NULL, NULL, NULL, '2', '2022-06-09 15:58:48', NULL, '1');
+INSERT INTO `ls_task` VALUES (10, '123', '[\"/lsImgUpload/task/image/20220609/oMvZf4-AgoG6u8DINGFcRZlMUAGk/f267c5af0551420ea553d43304c62bce-0.png\",\"/lsImgUpload/task/image/20220609/oMvZf4-AgoG6u8DINGFcRZlMUAGk/5d34241e17194fbf8880865d20da7801-0.png\",\"/lsImgUpload/task/image/20220609/oMvZf4-AgoG6u8DINGFcRZlMUAGk/f78e52a41b144987b049520f57305e48-0.png\",\"/lsImgUpload/task/image/20220609/oMvZf4-AgoG6u8DINGFcRZlMUAGk/74cdfbcc673144a4beba1f7889da0a7f-0.png\",\"/lsImgUpload/task/image/20220609/oMvZf4-AgoG6u8DINGFcRZlMUAGk/0a2c649a190b4a66a4acc739fcb3e495-0.png\",\"/lsImgUpload/task/image/20220609/oMvZf4-AgoG6u8DINGFcRZlMUAGk/e109177907e74ba8b07efe873102fabc-0.png\",\"/lsImgUpload/task/image/20220609/oMvZf4-AgoG6u8DINGFcRZlMUAGk/90c68372388f470faf647b576d0d3935-0.png\",\"/lsImgUpload/task/image/20220609/oMvZf4-AgoG6u8DINGFcRZlMUAGk/4b19aa44490f4bf69298077e779c02c1-0.png\"]', 8, '2022-06-09 17:14:19', '2022-06-23 00:00:00', NULL, NULL, NULL, NULL, NULL, '2', '2022-06-09 17:14:19', NULL, '1');
+INSERT INTO `ls_task` VALUES (11, 'rrr', '[\"/lsImgUpload/task/image/20220609/oMvZf4-AgoG6u8DINGFcRZlMUAGk/400c839f9e774afba4be37ed473352a5-0.png\",\"/lsImgUpload/task/image/20220609/oMvZf4-AgoG6u8DINGFcRZlMUAGk/70e7d76e8cca47b2bc73979b9e7285f2-0.png\",\"/lsImgUpload/task/image/20220609/oMvZf4-AgoG6u8DINGFcRZlMUAGk/504dd9817daf462bb926c880757ca5e4-0.png\"]', 8, '2022-06-09 17:16:41', '2022-06-23 00:00:00', NULL, NULL, NULL, NULL, NULL, '1', '2022-06-09 17:16:41', '2022-06-09 17:16:47', '1');
+INSERT INTO `ls_task` VALUES (12, 'afafdsa', '[\"/lsImgUpload/task/image/20220614/oMvZf4-AgoG6u8DINGFcRZlMUAGk/7f18001a9cdd4258a31a8f94619e3037-0.png\",\"/lsImgUpload/task/image/20220614/oMvZf4-AgoG6u8DINGFcRZlMUAGk/b53d7a2b7b1548bab572cbc791a0e9ca-0.png\",\"/lsImgUpload/task/image/20220614/oMvZf4-AgoG6u8DINGFcRZlMUAGk/74df4bac7b074ba29c7bb044b52f839c-0.png\",\"/lsImgUpload/task/image/20220614/oMvZf4-AgoG6u8DINGFcRZlMUAGk/9c710d9b007b41aa89b359a12d465eca-0.png\"]', 8, '2022-06-14 10:07:45', '2022-06-15 00:00:00', NULL, NULL, NULL, NULL, NULL, '2', '2022-06-14 10:07:45', NULL, '1');
+INSERT INTO `ls_task` VALUES (13, '22', '[\"/lsImgUpload/task/image/20220614/oMvZf4-AgoG6u8DINGFcRZlMUAGk/dbe62ac7df674985b71be4cc0ff516db-0.png\"]', 8, '2022-06-14 11:01:24', '2022-06-24 00:00:00', NULL, NULL, NULL, NULL, NULL, '1', '2022-06-14 11:01:24', '2022-06-14 11:02:07', '1');
+INSERT INTO `ls_task` VALUES (14, '666', '[\"/lsImgUpload/task/image/20220614/oMvZf4-AgoG6u8DINGFcRZlMUAGk/fe33ac4c25274998b4e0cff6b1075255-0.png\"]', 8, '2022-06-14 11:03:17', '2022-06-23 00:00:00', NULL, NULL, NULL, NULL, NULL, '2', '2022-06-14 11:03:17', '2022-06-14 11:03:50', '1');
+INSERT INTO `ls_task` VALUES (15, 'uuuu', '[\"/lsImgUpload/task/image/20220615/oMvZf4-AgoG6u8DINGFcRZlMUAGk/6c277890b5494f0196d766fcd8a5cc9d-0.png\"]', 8, '2022-06-15 12:00:43', '2022-06-24 00:00:00', NULL, NULL, NULL, NULL, NULL, '2,1', '2022-06-15 12:00:43', '2022-06-15 14:06:53', '1');
+INSERT INTO `ls_task` VALUES (16, 'tttt', '[\"/lsImgUpload/task/image/20220615/oMvZf4-AgoG6u8DINGFcRZlMUAGk/f1f427e3a0b243c997b64d799c806832-0.png\"]', 8, '2022-06-15 14:09:03', '2022-06-30 00:00:00', NULL, NULL, NULL, NULL, NULL, '1', '2022-06-15 14:09:03', '2022-06-15 14:09:07', '1');
+INSERT INTO `ls_task` VALUES (17, 'yyyy', '[\"/lsImgUpload/task/image/20220615/oMvZf4-AgoG6u8DINGFcRZlMUAGk/c5e5141d9131486ea1f7a355dec5915a-0.png\"]', 8, '2022-06-15 14:09:24', '2022-06-28 00:00:00', NULL, NULL, NULL, NULL, NULL, '1', '2022-06-15 14:09:24', '2022-06-15 14:09:27', '1');
 
 -- ----------------------------
 -- Table structure for ls_user
@@ -6614,7 +6626,7 @@ CREATE TABLE `ls_user`  (
 -- ----------------------------
 INSERT INTO `ls_user` VALUES (1, '张三', NULL, '18333603120', NULL, '1', NULL, NULL, NULL, 199, '永安', NULL, NULL, '2022-05-07 23:02:54', NULL, '1');
 INSERT INTO `ls_user` VALUES (2, '李四', NULL, NULL, NULL, '2', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-05-07 23:02:54', NULL, '1');
-INSERT INTO `ls_user` VALUES (8, '333', NULL, '18333606313', '2222', 'oMvZf4-AgoG6u8DINGFcRZlMUAGk', NULL, '/lsImgUpload/user/avatar/image/20220608/oMvZf4-AgoG6u8DINGFcRZlMUAGk/536efa9637be43c9a4f428fd48992d90-0.png', NULL, 224, '3333', NULL, 1, '2022-05-18 11:42:37', '2022-06-10 17:10:37', '1');
+INSERT INTO `ls_user` VALUES (8, '333', NULL, '18333606313', '2222', 'oMvZf4-AgoG6u8DINGFcRZlMUAGk', NULL, '/lsImgUpload/user/avatar/image/20220608/oMvZf4-AgoG6u8DINGFcRZlMUAGk/536efa9637be43c9a4f428fd48992d90-0.png', NULL, 224, '3333', NULL, 2, '2022-05-18 11:42:37', '2022-06-15 11:03:34', '1');
 
 -- ----------------------------
 -- Table structure for ls_user_case
@@ -6626,7 +6638,7 @@ CREATE TABLE `ls_user_case`  (
   `case_id` int(11) NULL DEFAULT NULL,
   `create_time` datetime NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户案例收藏表' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户案例收藏表' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of ls_user_case
@@ -6634,5 +6646,6 @@ CREATE TABLE `ls_user_case`  (
 INSERT INTO `ls_user_case` VALUES (1, 8, 1, '2022-06-10 14:22:13');
 INSERT INTO `ls_user_case` VALUES (3, 8, 5, '2022-06-10 14:39:52');
 INSERT INTO `ls_user_case` VALUES (4, 8, 3, '2022-06-10 14:42:28');
+INSERT INTO `ls_user_case` VALUES (5, 8, 9, '2022-06-15 09:43:20');
 
 SET FOREIGN_KEY_CHECKS = 1;
