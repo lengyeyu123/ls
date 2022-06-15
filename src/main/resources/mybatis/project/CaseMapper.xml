@@ -5,14 +5,23 @@
 <mapper namespace="com.han.ls.project.mapper.CaseMapper">
 
 
-    <insert id="add" parameterType="com.han.ls.project.domain.Case">
-        insert into ls_case (user_id, description, county_id, address, desc_imgs, create_time)
-        values (#{userId}, #{description}, #{countyId}, #{address}, #{descImgs}, #{createTime})
+    <insert id="add" parameterType="com.han.ls.project.domain.Case" useGeneratedKeys="true" keyProperty="id">
+        insert into ls_case (user_id, description, county_id, address, desc_imgs, duty_ids, create_time)
+        values (#{userId}, #{description}, #{countyId}, #{address}, #{descImgs}, #{dutyIds}, #{createTime})
     </insert>
     <insert id="collectCase" parameterType="com.han.ls.project.domain.UserCase">
         insert into ls_user_case (user_id, case_id, create_time)
         values (#{userId}, #{caseId}, #{createTime})
     </insert>
+    <update id="update">
+        update ls_case
+        set description = #{description},
+            county_id   = #{countyId},
+            address     = #{address},
+            desc_imgs   = #{descImgs},
+            duty_ids    = #{dutyIds}
+        where id = #{id}
+    </update>
     <delete id="unCollectCase">
         delete
         from ls_user_case

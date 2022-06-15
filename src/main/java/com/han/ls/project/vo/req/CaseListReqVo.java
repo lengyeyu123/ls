@@ -17,6 +17,8 @@ public class CaseListReqVo {
     @Min(1)
     private Integer pageSize;
 
+    private String dutyName;
+
     private String description;
 
     private String userName;

@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.han.ls.common.utils.JsonUtils;
 import com.han.ls.framework.utils.LsUtils;
 import com.han.ls.project.domain.Case;
+import com.han.ls.project.domain.Duty;
 import com.han.ls.project.domain.Task;
 import com.han.ls.project.domain.User;
 import com.han.ls.project.mapper.CaseMapper;
@@ -30,6 +31,9 @@ public class TaskService {
     @Autowired
     private CaseMapper caseMapper;
 
+    @Autowired
+    private DutyService dutyService;
+
     @SneakyThrows
     public int add(AddTaskReqVo reqVo) {
         User loginUser = LsUtils.getLoginUser();
@@ -41,6 +45,7 @@ public class TaskService {
             updateTask.setDescription(reqVo.getDescription());
             updateTask.setDescImgs(JsonUtils.toJson(reqVo.getImgArr()));
             updateTask.setDeadline(reqVo.getDeadline());
+            updateTask.setDutyIds(StringUtils.join(reqVo.getDutyIdArr(), ","));
             updateTask.setUpdateTime(now);
             taskMapper.update(updateTask);
             return updateTask.getId();
@@ -50,6 +55,7 @@ public class TaskService {
                     .setDescImgs(JsonUtils.toJson(reqVo.getImgArr()))
                     .setCreateTime(now)
                     .setDeadline(reqVo.getDeadline())
+                    .setDutyIds(StringUtils.join(reqVo.getDutyIdArr(), ","))
                     .setIssuerId(loginUser.getId())
                     .setPublishTime(now)
             );
@@ -60,6 +66,10 @@ public class TaskService {
 
     @SneakyThrows
     public List<Task> list(TaskListReqVo reqVo) {
+        if (StringUtils.isNotBlank(reqVo.getDutyName())) {
+            Duty duty = dutyService.selectByName(reqVo.getDutyName());
+            reqVo.setDutyId(duty.getId());
+        }
         PageHelper.startPage(reqVo);
         List<Task> list = taskMapper.list(reqVo);
         for (Task task : list) {

@@ -9,6 +9,8 @@ import java.util.List;
 @Data
 public class AddCaseReqVo {
 
+    private int id;
+
     @NotBlank
     private String description;
 
@@ -18,5 +20,7 @@ public class AddCaseReqVo {
 
     @NotNull
     private List<String> imgArr;
+
+    private List<Integer> dutyIdArr;
 
 }

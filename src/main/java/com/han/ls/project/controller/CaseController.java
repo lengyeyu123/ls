@@ -20,8 +20,7 @@ public class CaseController {
 
     @PostMapping("/add")
     public R<?> add(@RequestBody @Validated AddCaseReqVo reqVo) {
-        caseService.add(reqVo);
-        return R.success();
+        return R.success(caseService.add(reqVo));
     }
 
     @PostMapping("/list")

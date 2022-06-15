@@ -94,6 +94,10 @@ public class UserService {
             Duty duty = dutyService.selectById(reqVo.getDutyId());
             loginUser.setDuty(duty);
         }
+        if (StringUtils.isNotBlank(reqVo.getDutyName())) {
+            Duty duty = dutyService.selectByName(reqVo.getDutyName());
+            loginUser.setDuty(duty);
+        }
 
         loginUser.setAddress(reqVo.getAddress())
                 .setWxCode(reqVo.getWxCode())

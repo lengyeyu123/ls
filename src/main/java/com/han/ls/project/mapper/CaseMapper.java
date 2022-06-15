@@ -22,4 +22,6 @@ public interface CaseMapper {
     int countByUserIdAndCaseId(@Param("userId") int userId, @Param("caseId") int caseId);
 
     List<Case> collectList(CaseListReqVo reqVo);
+
+    void update(Case aCase);
 }

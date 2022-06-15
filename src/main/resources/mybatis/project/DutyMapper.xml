@@ -54,6 +54,11 @@
         from ls_duty
         where id = #{dutyId}
     </select>
+    <select id="selectByName" resultType="com.han.ls.project.domain.Duty">
+        select *
+        from ls_duty
+        where name = #{name}
+    </select>
 
     <resultMap id="standardMap" type="com.han.ls.project.domain.DutyStandard">
         <id column="id" property="id"/>
@@ -77,4 +82,5 @@
                  left join ls_duty on ls_duty_standard.duty_id = ls_duty.id
         order by ls_duty.order_no
     </select>
+
 </mapper>

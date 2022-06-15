@@ -72,4 +72,8 @@ public class DutyService {
             dutyMapper.standardUpdate(reqVo);
         }
     }
+
+    public Duty selectByName(String name) {
+        return dutyMapper.selectByName(name);
+    }
 }

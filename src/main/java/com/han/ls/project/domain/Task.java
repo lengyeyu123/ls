@@ -41,6 +41,8 @@ public class Task {
 
     private String satisfaction;
 
+    private String dutyIds;
+
     private Date createTime;
 
     private Date updateTime;

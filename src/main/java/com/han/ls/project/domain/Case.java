@@ -34,6 +34,8 @@ public class Case {
      */
     private boolean collectFlag;
 
+    private String dutyIds;
+
 
     /**
      * 创建时间

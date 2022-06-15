@@ -30,4 +30,7 @@ public class AddTaskReqVo {
     @NotNull
     private Date deadline;
 
+    @NotNull
+    private List<Integer> dutyIdArr;
+
 }

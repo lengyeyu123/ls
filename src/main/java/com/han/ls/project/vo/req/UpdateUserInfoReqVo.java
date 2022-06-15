@@ -21,4 +21,6 @@ public class UpdateUserInfoReqVo {
 
     private int dutyId;
 
+    private String dutyName;
+
 }

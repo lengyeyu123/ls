@@ -5,8 +5,8 @@
 <mapper namespace="com.han.ls.project.mapper.TaskMapper">
 
     <insert id="add" parameterType="com.han.ls.project.domain.Task" useGeneratedKeys="true" keyProperty="id">
-        insert into ls_task (description, desc_imgs, issuer_id, publish_time, deadline, create_time)
-        values (#{description}, #{descImgs}, #{issuerId}, #{publishTime}, #{deadline}, #{createTime})
+        insert into ls_task (description, desc_imgs, issuer_id, publish_time, deadline, duty_ids, create_time)
+        values (#{description}, #{descImgs}, #{issuerId}, #{publishTime}, #{deadline}, #{dutyIds}, #{createTime})
     </insert>
     <update id="finish" parameterType="com.han.ls.project.domain.Task">
         update ls_task
@@ -22,6 +22,7 @@
         set description = #{description},
             desc_imgs   = #{descImgs},
             deadline    = #{deadline},
+            duty_ids    = #{dutyIds},
             update_time = #{updateTime}
         where id = #{id}
     </update>
@@ -36,6 +37,9 @@
         select ls_task.*, ls_user.phone, ls_user.wx_code from ls_task,ls_user
         <where>
             and ls_task.issuer_id = ls_user.id
+            <if test="dutyId > 0">
+                and ls_task.duty_ids like CONCAT('%', #{dutyId}, '%')
+            </if>
             <if test="searchValue != null and searchValue != ''">
                 and (ls_task.description like CONCAT ('%', #{searchValue}, '%') or ls_user.user_name like CONCAT ('%',
                 #{searchValue}, '%') )

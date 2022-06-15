@@ -13,6 +13,8 @@ public class TaskListReqVo {
 
     private int dutyId;
 
+    private String dutyName;
+
     private String userName;
 
     private Date publishTimeStart;

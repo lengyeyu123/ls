@@ -18,6 +18,7 @@ import com.han.ls.project.vo.req.AddCaseReqVo;
 import com.han.ls.project.vo.req.CaseListReqVo;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,7 +38,7 @@ public class CaseService {
     private CaseMapper caseMapper;
 
     @SneakyThrows
-    public void add(AddCaseReqVo reqVo) {
+    public int add(AddCaseReqVo reqVo) {
         User loginUser = LsUtils.getLoginUser();
 
         // 验证用户上传信息是否安全
@@ -62,14 +63,28 @@ public class CaseService {
             throw new ServiceException(ResultStatus.VIOLATION_CONTENT);
         }
 
-        caseMapper.add(new Case()
-                .setUserId(loginUser.getId())
-                .setDescription(reqVo.getDescription())
-                .setCountyId(reqVo.getCountyId())
-                .setAddress(reqVo.getAddress())
-                .setDescImgs(JsonUtils.toJson(reqVo.getImgArr()))
-                .setCreateTime(new Date())
-        );
+        if (reqVo.getId() > 0) {
+            Case aCase = new Case()
+                    .setId(reqVo.getId())
+                    .setDescription(reqVo.getDescription())
+                    .setCountyId(reqVo.getCountyId())
+                    .setAddress(reqVo.getAddress())
+                    .setDescImgs(JsonUtils.toJson(reqVo.getImgArr()))
+                    .setDutyIds(StringUtils.join(reqVo.getDutyIdArr(), ","));
+            caseMapper.update(aCase);
+            return aCase.getId();
+        } else {
+            Case aCase = new Case()
+                    .setUserId(loginUser.getId())
+                    .setDescription(reqVo.getDescription())
+                    .setCountyId(reqVo.getCountyId())
+                    .setAddress(reqVo.getAddress())
+                    .setDescImgs(JsonUtils.toJson(reqVo.getImgArr()))
+                    .setDutyIds(StringUtils.join(reqVo.getDutyIdArr(), ","))
+                    .setCreateTime(new Date());
+            caseMapper.add(aCase);
+            return aCase.getId();
+        }
     }
 
     public List<Case> list(CaseListReqVo reqVo) {
