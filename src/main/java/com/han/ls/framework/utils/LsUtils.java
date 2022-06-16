@@ -9,13 +9,15 @@ import org.springframework.security.core.context.SecurityContextHolder;
 public class LsUtils {
 
     public static User getLoginUser() {
-        User user = null;
-        try {
-            user = ((LoginUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getUser();
-        } catch (Exception e) {
-            log.error("获取当前登陆用户失败", e);
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof String) {
+            log.info("未获取到当前登陆用户SpringSecurity中的用户信息为{}", principal);
+            return null;
         }
-        return user;
+        if (principal instanceof LoginUser) {
+            return ((LoginUser) principal).getUser();
+        }
+        return null;
     }
 
 }

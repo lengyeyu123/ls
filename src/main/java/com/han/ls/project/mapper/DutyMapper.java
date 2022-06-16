@@ -23,4 +23,6 @@ public interface DutyMapper {
     void standardUpdate(StandardUpdateReqVo reqVo);
 
     Duty selectByName(String name);
+
+    DutyStandard getStandardById(int id);
 }

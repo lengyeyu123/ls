@@ -18,8 +18,8 @@
             <if test="name != null and name != ''">
                 name = #{name},
             </if>
-            <if test="description != null and description != ''">
-                description = #{description},
+            <if test="standardDesc != null and standardDesc != ''">
+                standard_desc = #{standardDesc},
             </if>
             <if test="orderNo != 0">
                 orderNo = #{orderNo}
@@ -67,20 +67,30 @@
         <association property="duty" javaType="com.han.ls.project.domain.Duty">
             <id column="duty_id" property="id"/>
             <result column="name" property="name"/>
-            <result column="duty_description" property="description"/>
+            <result column="standard_desc" property="standardDesc"/>
             <result column="order_no" property="orderNo"/>
         </association>
     </resultMap>
 
     <select id="standardAll" resultMap="standardMap">
         select ls_duty_standard.*,
-               ls_duty.id          as duty_id,
+               ls_duty.id as duty_id,
                ls_duty.name,
-               ls_duty.description as duty_description,
+               ls_duty.standard_desc,
                ls_duty.order_no
         from ls_duty_standard
                  left join ls_duty on ls_duty_standard.duty_id = ls_duty.id
         order by ls_duty.order_no
+    </select>
+    <select id="getStandardById" resultMap="standardMap">
+        select ls_duty_standard.*,
+               ls_duty.id as duty_id,
+               ls_duty.name,
+               ls_duty.standard_desc,
+               ls_duty.order_no
+        from ls_duty_standard
+                 left join ls_duty on ls_duty_standard.duty_id = ls_duty.id
+        where duty_id = #{id}
     </select>
 
 </mapper>

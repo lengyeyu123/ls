@@ -73,7 +73,7 @@
         <association property="duty" javaType="com.han.ls.project.domain.Duty">
             <id column="duty_id" property="id"/>
             <result column="duty_name" property="name"/>
-            <result column="description" property="description"/>
+            <result column="standard_desc" property="standardDesc"/>
         </association>
     </resultMap>
 
@@ -81,7 +81,7 @@
         select ls_user.*,
                ls_duty.id     as duty_id,
                ls_duty.name   as duty_name,
-               ls_duty.description,
+               ls_duty.standard_desc,
                ls_county.id   as county_id,
                ls_county.code,
                ls_county.name as county_name,
@@ -101,7 +101,7 @@
         select ls_user.*,
                ls_duty.id     as duty_id,
                ls_duty.name   as duty_name,
-               ls_duty.description,
+               ls_duty.standard_desc,
                ls_county.id   as county_id,
                ls_county.code,
                ls_county.name as county_name,

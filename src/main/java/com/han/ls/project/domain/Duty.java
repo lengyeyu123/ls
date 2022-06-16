@@ -18,7 +18,7 @@ public class Duty {
     @NotBlank
     private String name;
 
-    private String description;
+    private String standardDesc;
 
     /**
      * 排序字段

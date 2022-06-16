@@ -43,6 +43,11 @@ public class DutyController {
         return R.success(dutyService.standardAll());
     }
 
+    @GetMapping("/standard/getByDutyName")
+    public R<?> getStandardByDutyName(@RequestParam String dutyName) {
+        return R.success(dutyService.getStandardByDutyName(dutyName));
+    }
+
     @PostMapping("/standard/add")
     public R<?> standardAdd(@RequestBody @Validated StandardAddReqVo reqVo) {
         dutyService.standardAdd(reqVo);

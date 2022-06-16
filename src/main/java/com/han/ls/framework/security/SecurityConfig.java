@@ -39,7 +39,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/address/selectCityByProvinceId",
                         "/address/allProvince",
                         "/case/list",
-                        "/task/list"
+                        "/task/list",
+                        "/duty/all"
                 ).permitAll()
                 .anyRequest().authenticated()
                 .and().formLogin().disable();

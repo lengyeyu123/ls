@@ -36,7 +36,7 @@ public class DutyService {
             throw new ValidationException("id不能为空");
         }
 
-        if (!StringUtils.isBlank(duty.getName()) || !StringUtils.isBlank(duty.getDescription())) {
+        if (!StringUtils.isBlank(duty.getName()) || !StringUtils.isBlank(duty.getStandardDesc())) {
             dutyMapper.update(duty);
         }
     }
@@ -75,5 +75,10 @@ public class DutyService {
 
     public Duty selectByName(String name) {
         return dutyMapper.selectByName(name);
+    }
+
+    public DutyStandard getStandardByDutyName(String name) {
+        Duty duty = dutyMapper.selectByName(name);
+        return dutyMapper.getStandardById(duty.getId());
     }
 }
