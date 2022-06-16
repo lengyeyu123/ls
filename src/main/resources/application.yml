@@ -29,12 +29,18 @@ server:
       max: 800
       # Tomcat启动初始化的线程数，默认值10
       min-spare: 100
+    # 若客户端支持长连接则设置长连接提高服务器性能 100 若不支持则禁用(nginx不支持禁用掉 1)
+    max-keep-alive-requests: 1
+    # 保持长连接 超时时间5s
+    keep-alive-timeout: 5
 
 # 日志配置
 logging:
   level:
     com.han.ls: debug
     org.springframework: info
+    com.zaxxer.hikari.HikariConfig: debug
+    com.zaxxer.hikari: debug
 
 # Spring配置
 spring:
