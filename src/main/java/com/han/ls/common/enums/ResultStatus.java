@@ -9,11 +9,11 @@ public enum ResultStatus {
 
     ERROR(50000, "服务器内部错误"),
 
-    INVALID_TOKEN(-1, "未登录，请登录后使用"),
+    INVALID_TOKEN(-1, "请登陆后重试"),
 
     ACCOUNT_ERROR(50101, "账户异常"),
 
-    VIOLATION_CONTENT(50102, "您上传的内容不安全，请重新编辑后上传"),
+    VIOLATION_CONTENT(50102, "内容不安全"),
 
     ;
 

@@ -22,7 +22,10 @@ public class DutyService {
     @Autowired
     private DutyMapper dutyMapper;
 
+    @SneakyThrows
     public List<Duty> all() {
+        Thread.sleep(9000L);
+
         return dutyMapper.all();
     }
 
