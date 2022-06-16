@@ -24,8 +24,6 @@ public class DutyService {
 
     @SneakyThrows
     public List<Duty> all() {
-        Thread.sleep(9000L);
-
         return dutyMapper.all();
     }
 
