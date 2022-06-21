@@ -1,6 +1,5 @@
 package com.han.ls.framework.security;
 
-import com.han.ls.common.exception.ServiceException;
 import com.han.ls.project.domain.User;
 import com.han.ls.project.mapper.UserMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -25,13 +24,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (StringUtils.isBlank(openId)) {
             // 请求未携带openId 系统异常
             log.error("未携带openId请求异常");
-            throw new ServiceException();
+            throw new UsernameNotFoundException("openId为空");
         }
         User user = userMapper.selectByOpenId(openId);
         if (Objects.isNull(user)) {
             // 系统异常 未成功注册用户 或 openId错误
             log.error("根据openid {} 未查询到用户", openId);
-            throw new ServiceException();
+            throw new UsernameNotFoundException("根据openId：" + openId + "未查找到用户");
         }
         return new LoginUser(user);
     }

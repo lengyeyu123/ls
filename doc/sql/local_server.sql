@@ -11,7 +11,7 @@
  Target Server Version : 50540
  File Encoding         : 65001
 
- Date: 15/06/2022 15:57:56
+ Date: 21/06/2022 11:49:22
 */
 
 SET NAMES utf8mb4;
@@ -6464,17 +6464,21 @@ DROP TABLE IF EXISTS `ls_duty`;
 CREATE TABLE `ls_duty`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `standard_desc` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL COMMENT '标准(富文本)',
   `order_no` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `name`(`name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of ls_duty
 -- ----------------------------
-INSERT INTO `ls_duty` VALUES (1, '水电', '水电修改', 1);
+INSERT INTO `ls_duty` VALUES (1, '水电', '<h3 style=\"line-height: 1.5;\"><span style=\"color: rgb(231, 95, 51); font-size: 16px; font-family: 标楷体;\"><u><em><code><strong>案发当时</strong></code></em></u></span></h3>', 1);
 INSERT INTO `ls_duty` VALUES (2, '油漆', '腻子喷子', 2);
+INSERT INTO `ls_duty` VALUES (3, 'q', NULL, 3);
+INSERT INTO `ls_duty` VALUES (4, 'w', NULL, 4);
+INSERT INTO `ls_duty` VALUES (5, 'e', NULL, 5);
+INSERT INTO `ls_duty` VALUES (6, '其他', NULL, 1000);
 
 -- ----------------------------
 -- Table structure for ls_duty_addr_price
@@ -6503,12 +6507,14 @@ CREATE TABLE `ls_duty_standard`  (
   `duty_id` int(11) NULL DEFAULT NULL,
   `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `desc_imgs` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `duty_id`(`duty_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '工种施工标准 暂时无用' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of ls_duty_standard
 -- ----------------------------
+INSERT INTO `ls_duty_standard` VALUES (1, 1, '描述', NULL);
 
 -- ----------------------------
 -- Table structure for ls_province
@@ -6619,7 +6625,7 @@ CREATE TABLE `ls_user`  (
   `update_time` datetime NULL DEFAULT NULL,
   `available` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '1' COMMENT '\'0\'禁用 \'1\'可用',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of ls_user
@@ -6627,6 +6633,8 @@ CREATE TABLE `ls_user`  (
 INSERT INTO `ls_user` VALUES (1, '张三', NULL, '18333603120', NULL, '1', NULL, NULL, NULL, 199, '永安', NULL, NULL, '2022-05-07 23:02:54', NULL, '1');
 INSERT INTO `ls_user` VALUES (2, '李四', NULL, NULL, NULL, '2', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-05-07 23:02:54', NULL, '1');
 INSERT INTO `ls_user` VALUES (8, '333', NULL, '18333606313', '2222', 'oMvZf4-AgoG6u8DINGFcRZlMUAGk', NULL, '/lsImgUpload/user/avatar/image/20220608/oMvZf4-AgoG6u8DINGFcRZlMUAGk/536efa9637be43c9a4f428fd48992d90-0.png', NULL, 224, '3333', NULL, 2, '2022-05-18 11:42:37', '2022-06-15 11:03:34', '1');
+INSERT INTO `ls_user` VALUES (9, '张三', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-06-16 11:07:51', NULL, '1');
+INSERT INTO `ls_user` VALUES (10, '李四', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-06-16 11:07:51', NULL, '1');
 
 -- ----------------------------
 -- Table structure for ls_user_case

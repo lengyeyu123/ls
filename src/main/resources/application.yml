@@ -37,7 +37,7 @@ server:
 # 日志配置
 logging:
   level:
-    com.han.ls: error
+    com.han.ls: debug
     org.springframework: info
     com.zaxxer.hikari.HikariConfig: debug
     com.zaxxer.hikari: debug
@@ -108,12 +108,6 @@ pagehelper:
   helperDialect: mysql
   supportMethodsArguments: true
   params: count=countSql
-
-# Swagger配置
-swagger:
-  # 是否开启swagger
-  enabled: true
-
 
 # token配置
 token:
