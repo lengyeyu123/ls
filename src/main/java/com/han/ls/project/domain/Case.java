@@ -26,7 +26,9 @@ public class Case {
 
     private String descImgs;
 
-    // 前端返回拼接字段
+    /**
+     * 前端返回拼接字段
+     */
     private List<String> imgArr;
 
     /**

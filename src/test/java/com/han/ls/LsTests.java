@@ -1,25 +1,15 @@
-// package com.han.ls;
-//
-// import com.google.common.base.Charsets;
-// import com.google.common.io.Files;
-// import com.han.ls.framework.config.properties.TokenProperties;
-// import com.han.ls.project.domain.*;
-// import com.han.ls.project.service.AddressService;
-// import com.han.ls.project.service.UserService;
-// import io.jsonwebtoken.Claims;
-// import io.jsonwebtoken.Jwts;
-// import io.jsonwebtoken.SignatureAlgorithm;
-// import org.junit.jupiter.api.Test;
-// import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.boot.test.context.SpringBootTest;
-//
-// import java.io.File;
-// import java.io.IOException;
-// import java.util.*;
-//
-// @SpringBootTest
-// public class LsTests {
-//
+package com.han.ls;
+
+import lombok.AllArgsConstructor;
+import lombok.SneakyThrows;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
+
+@SpringBootTest
+public class LsTests {
+
 //     @Autowired
 //     private AddressService addressService;
 //
@@ -146,5 +136,81 @@
 //                 .getBody();
 //         System.out.println(body);
 //     }
-//
-// }
+
+    /**
+     * https://www.cnblogs.com/chenny7/p/13187826.html
+     * 测试多线程
+     */
+    public static void main(String[] args) {
+        AtomicInteger mThreadNum = new AtomicInteger(1);
+
+        // TODO 吞吐量
+        // corePoolSize 核心线程数，一旦创建将不会在释放
+        // maximumPoolSize 最大线程数，如果最大线程数等于核心线程数，则无法创建非核心线程，如果非核心线程处于空闲时，超过设置的空闲时间，则将被回收，释放占用的资源
+        // keepAliveTime 也就是当线程空闲时，所允许保存的最大时间，超过这个时间，线程将被释放销毁，但只针对于非核心线程。
+        // workQueue 任务队列，用于保存的的古代执行的任务的阻塞队列，可以选择以下几个阻塞队列
+        // 1. ArrayBlockingQueue 一个基于数组结构的有界阻塞队列，必须设置容量。此队列按 FIFO（先进先出）原则对元素进行排序。
+        // 2. LinkedBlockingQueue 一个基于链表结构的阻塞队列，可以设置容量，此队列按FIFO （先进先出） 排序元素，吞吐量通常要高于ArrayBlockingQueue。
+        // 3. SynchronousQueue 一个不存储元素的阻塞队列。每个插入offer操作必须等到另一个线程调用移除poll操作，否则插入操作一直处于阻塞状态，吞吐量通常要高于LinkedBlockingQueue。
+        // 4. PriorityBlockingQueue 一个具有优先级的无限阻塞队列。
+        // threadFactory 线程工厂，用于创建线程
+        // RejectedExecutionHandler 拒绝策略，当线程边界和队列容量已经达到最大时，用于处理阻塞的线程。
+        // 1. AbortPolicy：默认策略，抛出异常RejectedExecutionException拒绝提交任务；
+        // 2. CallerRunsPolicy：由调用execute方法提交任务的线程来执行这个任务；
+        // 3. DiscardPolicy：直接抛弃任务，不做任何处理；
+        // 4. DiscardOldestPolicy：去除任务队列中的第一个任务，重新提交；
+        ThreadPoolExecutor executor = new ThreadPoolExecutor(
+                2,
+                4,
+                10,
+                TimeUnit.SECONDS,
+                new ArrayBlockingQueue<>(2),
+                new ThreadFactory() {
+                    @Override
+                    public Thread newThread(Runnable r) {
+                        Thread t = new Thread(r, "my-thread-" + mThreadNum.getAndIncrement());
+                        System.out.println(t.getName() + " has bean created");
+                        return t;
+                    }
+                },
+                new RejectedExecutionHandler() {
+                    @Override
+                    public void rejectedExecution(Runnable r, ThreadPoolExecutor executor) {
+                        System.err.println(r.toString() + " rejected");
+                    }
+                }
+        );
+
+        // 预启动所有核心线程
+        executor.prestartAllCoreThreads();
+
+        for (int i = 1; i < 10; i++) {
+            MyTask task = new MyTask(String.valueOf(i));
+            // 提交任务有两个方法
+            // 1. execute(Runnable)，无返回值；
+            // 2. submit(Callable<T>)，有返回值；
+            executor.execute(task);
+        }
+
+        executor.shutdown();
+    }
+
+    @AllArgsConstructor
+    static class MyTask implements Runnable {
+
+        private String name;
+
+        @SneakyThrows
+        @Override
+        public void run() {
+            System.out.println(this.toString() + " is running!");
+            Thread.sleep(2000);
+        }
+
+        @Override
+        public String toString() {
+            return "MyTask [name + " + name + "]";
+        }
+    }
+
+}
