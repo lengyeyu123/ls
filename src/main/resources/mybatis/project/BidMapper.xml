@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.han.ls.project.mapper.BidMapper">
+
+    <insert id="insertAll" parameterType="com.han.ls.project.domain.Bid" keyProperty="id" useGeneratedKeys="true">
+        insert into bid (title, upload_time, buyer, agent_company, bid_url, type, create_time, address)
+        values
+        <foreach collection="bids" index="index" item="item" separator=",">
+            (
+            #{item.title},
+            #{item.uploadTime},
+            #{item.buyer},
+            #{item.agentCompany},
+            #{item.bidUrl},
+            #{item.type},
+            #{item.createTime},
+            #{item.address}
+            )
+        </foreach>
+    </insert>
+    <select id="selectLikeType" resultType="com.han.ls.project.domain.Bid">
+        select * from bid
+        <where>
+            <foreach collection="types" index="index" item="item" separator="or">
+                type like CONCAT ('%', #{item}, '%')
+            </foreach>
+        </where>
+    </select>
+</mapper>

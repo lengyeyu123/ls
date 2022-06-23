@@ -2,21 +2,33 @@ package com.han.ls;
 
 
 import cn.hutool.http.HttpUtil;
+import com.google.common.collect.Lists;
+import com.han.ls.common.utils.DateUtils;
+import com.han.ls.common.utils.JsonUtils;
+import com.han.ls.project.domain.Bid;
+import com.han.ls.project.mapper.BidMapper;
 import lombok.AllArgsConstructor;
+import org.apache.commons.lang3.RandomUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @SpringBootTest
 public class GetBidsTest {
 
-    public static void main(String[] args) {
+    @Autowired
+    private BidMapper bidMapper;
+
+    @Test
+    public void insetBids() throws ExecutionException, InterruptedException {
         AtomicInteger mThreadNum = new AtomicInteger(1);
 
         ThreadPoolExecutor executor = new ThreadPoolExecutor(
@@ -24,7 +36,7 @@ public class GetBidsTest {
                 1,
                 10,
                 TimeUnit.SECONDS,
-                new LinkedBlockingQueue<>(20000),
+                new LinkedBlockingQueue<>(1000000),
                 new ThreadFactory() {
                     @Override
                     public Thread newThread(Runnable r) {
@@ -44,21 +56,23 @@ public class GetBidsTest {
         // 预启动所有核心线程
         executor.prestartAllCoreThreads();
 
-        for (int i = 1; i < 2; i++) {
+        for (int i = 1; i < 11; i++) {
             GetBidsTask getBidsTask = new GetBidsTask(String.valueOf(i));
-            executor.execute(getBidsTask);
+            Future<List<Bid>> submit = executor.submit(getBidsTask);
+            List<Bid> bids = submit.get();
+            bidMapper.insertAll(bids);
         }
 
         executor.shutdown();
     }
 
     @AllArgsConstructor
-    static class GetBidsTask implements Runnable {
+    static class GetBidsTask implements Callable {
 
         private String pageIndex;
 
         @Override
-        public void run() {
+        public List<Bid> call() throws Exception {
             Map<String, Object> params = new HashMap<>();
             params.put("searchtype", "1");
             // 页码
@@ -81,9 +95,33 @@ public class GetBidsTest {
             Document doc = Jsoup.parse(htmlStr);
             Elements liELes = doc.select("ul.vT-srch-result-list-bid > li");
 
-
-            System.out.println(liELes);
+            Date now = new Date();
+            List<Bid> insertList = new ArrayList<>();
+            for (Element liEle : liELes) {
+                Bid insert = new Bid();
+                insert.setTitle(liEle.select("a").text().trim());
+                String spanText = liEle.select("span").text().trim();
+                String[] split = spanText.split("\\|");
+                String uploadTimeStr = split[0].trim();
+                Date uploadTime = DateUtils.dateTime("yyyy.MM.dd HH:mm:ss", uploadTimeStr);
+                insert.setUploadTime(uploadTime);
+                insert.setBuyer(split[1].trim().replace("采购人：", ""));
+                insert.setAgentCompany(split[2].trim().replace("代理机构：", ""));
+                insert.setType(liEle.select("span > strong").last().text().trim());
+                insert.setBidUrl(liEle.select("a").first().attr("href").trim());
+                insert.setAddress(liEle.select("span > a").text().trim());
+                insert.setCreateTime(now);
+                insertList.add(insert);
+            }
+            Thread.sleep(RandomUtils.nextInt(6, 10) * 1000L);
+            return insertList;
         }
+    }
+
+    @Test
+    public void getSoftwareBids() {
+        List<Bid> bids = bidMapper.selectLikeType(Lists.newArrayList("软件", "运维", "信息"));
+        System.out.println(JsonUtils.toJson(bids));
     }
 
 }
