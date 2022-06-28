@@ -21,12 +21,11 @@ public class JwtUtils {
      */
     public static String generateJwt(TokenProperties.TokenConfig tokenConfig, Map<String, Object> claims) {
         String secret = tokenConfig.getSecret();
-        String token = Jwts.builder()
+
+        return Jwts.builder()
                 .setClaims(claims)
                 .setExpiration(new Date(System.currentTimeMillis() + tokenConfig.getExpireTime() * 60 * 1000L))
                 .signWith(SignatureAlgorithm.HS512, secret.getBytes()).compact();
-
-        return token;
     }
 
 
