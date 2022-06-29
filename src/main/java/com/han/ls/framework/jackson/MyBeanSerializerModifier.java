@@ -17,13 +17,12 @@ import java.util.List;
  * 1.当序列化类型为数组集合时，当值为null时，序列化成[]
  * 2.String类型值序列化为""
  */
-public class LsBeanSerializerModifier extends BeanSerializerModifier {
+public class MyBeanSerializerModifier extends BeanSerializerModifier {
 
     @Override
     public List<BeanPropertyWriter> changeProperties(SerializationConfig config, BeanDescription beanDesc, List<BeanPropertyWriter> beanProperties) {
         // 循环所有的beanPropertyWriter
-        for (int i = 0; i < beanProperties.size(); i++) {
-            BeanPropertyWriter writer = beanProperties.get(i);
+        for (BeanPropertyWriter writer : beanProperties) {
             // 判断字段的类型，如果是数组或集合则注册nullASerializer
             if (isArrayType(writer)) {
                 // 给writer注册一个自己的nullSerializer
