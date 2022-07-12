@@ -13,6 +13,9 @@ import org.springframework.web.multipart.MaxUploadSizeExceededException;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * @author han
+ */
 @RestControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler {
@@ -22,8 +25,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     public R<?> handleHttpRequestMethodNotSupported(HttpRequestMethodNotSupportedException e, HttpServletRequest request) {
-        String requestURI = request.getRequestURI();
-        log.error("请求地址'{}',不支持'{}'请求", requestURI, e.getMethod());
+        log.error("请求地址'{}',不支持'{}'请求", request.getRequestURI(), e.getMethod());
         return R.error(e);
     }
 
@@ -32,8 +34,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
     public R<?> methodArgumentNotValidExceptionHandler(MethodArgumentNotValidException e, HttpServletRequest request) {
-        String requestURI = request.getRequestURI();
-        log.error("请求地址'{}',参数验证未通过", requestURI);
+        log.error("请求地址'{}',参数验证未通过", request.getRequestURI());
         return R.error(e);
     }
 
@@ -42,15 +43,13 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(MaxUploadSizeExceededException.class)
     public R<?> handleMaxUploadSizeExceededException(MaxUploadSizeExceededException e, HttpServletRequest request) {
-        String requestURI = request.getRequestURI();
-        log.error("请求地址'{}',上传文件大小超过限制", requestURI);
+        log.error("请求地址'{}',上传文件大小超过限制", request.getRequestURI());
         return R.error(e);
     }
 
     @ExceptionHandler(AccountStatusException.class)
     public R<?> handleAccountStatusException(AccountStatusException e, HttpServletRequest request) {
-        String requestURI = request.getRequestURI();
-        log.error("请求地址'{}',账户异常", requestURI);
+        log.error("请求地址'{}',账户异常", request.getRequestURI());
         return  R.error(ResultStatus.ACCOUNT_ERROR);
     }
 
@@ -59,8 +58,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(ServiceException.class)
     public R<?> handleServiceException(ServiceException e, HttpServletRequest request) {
-        String requestURI = request.getRequestURI();
-        log.error("请求地址'{}',发生业务异常", requestURI);
+        log.error("请求地址'{}',发生业务异常", request.getRequestURI());
         log.error(e.getMessage(), e);
         return R.error(e);
     }
@@ -70,8 +68,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(RuntimeException.class)
     public R<?> handleRuntimeException(RuntimeException e, HttpServletRequest request) {
-        String requestURI = request.getRequestURI();
-        log.error("请求地址'{}',发生未知异常.", requestURI, e);
+        log.error("请求地址'{}',发生未知异常.", request.getRequestURI(), e);
         return R.error(e);
     }
 
@@ -80,10 +77,8 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(Exception.class)
     public R<?> handleException(Exception e, HttpServletRequest request) {
-        String requestURI = request.getRequestURI();
-        log.error("请求地址'{}',发生系统异常.", requestURI, e);
+        log.error("请求地址'{}',发生系统异常.", request.getRequestURI(), e);
         return R.error(e);
     }
-
 
 }
